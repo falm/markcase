@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
       flash[:notice] = "Welcome  #{@admin.username}"
       redirect_to root_path
     else
-      flash[:notice] = "The username or password are incorrect"
+      flash[:error] = "The username or password are incorrect"
       redirect_to root_path
     end
   end

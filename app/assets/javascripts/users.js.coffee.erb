@@ -1,0 +1,14 @@
+# Place all the behaviors and hooks related to the matching controller here.
+# All this logic will automatically be available in application.js.
+# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+
+
+#add_bookmark = (data) ->  
+#  ajax.
+$(document).ready ->  
+  $("add-bookmark").click ->
+    alert "add bookmark of users"
+    $.post bookmarks-path,#<%# bookmarks_path %>,
+      user_id: <%= current_user.user_id %>
+      link: $("prependedInput").value()
+    

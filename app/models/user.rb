@@ -33,8 +33,8 @@ class User < ActiveRecord::Base
   end
   
   def self.register(args)
-    return if User.find_by_username(args[:user][:username]) 
-    user = User.create(args[:user])
+    return if User.find_by_username(args[:username]) 
+    user = User.create(User.analysis(args))
     user.save!
     user
   end
@@ -44,5 +44,10 @@ class User < ActiveRecord::Base
     salt = Array.new(10) { rand(512).to_s(36) }.join
     self.salt, self.hashed_password =
       salt, Digest::SHA256.hexdigest(salt+pass)
+  end
+  
+  def self.analysis(args)
+    {username: args[:username], password: args[:password], password_confirmation: args[:password_confirmation],
+    email: args[:email]}
   end
 end

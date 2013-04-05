@@ -2,13 +2,13 @@ class UsersController < ApplicationController
   expose(:users)
   expose(:user)
   def create
-    @user = User.register(params[:user])
+    @user = User.register(params)
     if @user  
       session[:user] = @user
-      flash[:notice] = "Login successful!"
+      flash[:notice] = "register successful!"
       redirect_to home_path
     else
-      flash[:notice] = "your email or password are incorrect relase try again"       
+      flash[:error] = "your email or password are incorrect relase try again"       
       redirect_to root_path    
     end
 

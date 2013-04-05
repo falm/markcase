@@ -17,7 +17,7 @@
         <!-- Navbar link -->
         <ul class="nav">
           <li class="active">
-            <a href="#">首页</a>
+            <%= link_to "首页", root_path%>
           </li>
           <% if controller_name == "users"%>
             <li><a href="#add-mark" data-toggle="modal">添加书签</a></li>
@@ -36,25 +36,34 @@
           <% else %>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="icon-user icon-white"></i> 用户<b class="caret"></b></a>
+              <i class="icon-user icon-white"></i><%= current_user.username %><b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="#">个人设置</a></li>
+                <li><%= link_to "个人设置", settings_path %></li>
                 <li class="divider"></li>
-                <li><a href="#">退出</a></li>                  
+                <li><%= link_to "退出", sessions_path, method: :delete %></li>                  
               </ul>
             </li>            
           <% end %>
         </ul>     
         <!-- User Info END -->       
-      </div>    
-    </div>
+de      </div>    
   </div>
+    </div>
 </div>
 <!-- Navbar END -->
 
 <div class="body">
+  <% if flash[:error] %>
+  <div class="alert alert-error">
+    <button type="button" data-dismiss="alert" class="close">&times;</button>
+    <h3><%= flash[:error] %></h3>
+  </div>
+  <% end %>
   <% if flash[:notice] %>
-    <h4><%= flash[:notice]%></h4>
+    <div class="alert alert-success">
+      <button type="button" data-dismiss="alert" class="close">&times;</button>
+      <h3><%= flash[:notice] %></h3>
+    </div>
   <% end %>
   <%= yield %>
 </div>

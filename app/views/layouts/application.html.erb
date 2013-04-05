@@ -53,8 +53,17 @@ de      </div>
 <!-- Navbar END -->
 
 <div class="body">
+  <% if flash[:error] %>
+  <div class="alert alert-error">
+    <button type="button" data-dismiss="alert" class="close">&times;</button>
+    <h5><%= flash[:error] %></h5>
+  </div>
+  <% end %>
   <% if flash[:notice] %>
-    <h4><%= flash[:notice]%></h4>
+    <div class="alert alert-success">
+      <button type="button" data-dismiss="alert" class="close">&times;</button>
+      <h5><%= flash[:notice] %></h5>
+    </div>
   <% end %>
   <%= yield %>
 </div>

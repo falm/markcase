@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130402075710) do
+ActiveRecord::Schema.define(:version => 20130405105423) do
 
   create_table "administrators", :force => true do |t|
     t.string   "username"
@@ -20,6 +20,18 @@ ActiveRecord::Schema.define(:version => 20130402075710) do
     t.string   "salt"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+  end
+
+  create_table "bookmarks", :force => true do |t|
+    t.string   "title"
+    t.string   "link"
+    t.integer  "category_id"
+    t.integer  "user_id"
+    t.boolean  "star",        :default => false
+    t.boolean  "inbox",       :default => false
+    t.text     "note"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   create_table "users", :force => true do |t|

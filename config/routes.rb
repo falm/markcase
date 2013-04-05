@@ -6,6 +6,7 @@ Markcase::Application.routes.draw do
   resources :sessions
   resources :users
   resources :settings 
+  resources :bookmarks
   
   #admin namespace route
   match 'admin/login' => 'admin::sessions#new', :as => 'admin_login'
