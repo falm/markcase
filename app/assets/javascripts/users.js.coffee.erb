@@ -5,10 +5,43 @@
 
 #add_bookmark = (data) ->  
 #  ajax.
-$(document).ready ->  
-  $("add-bookmark").click ->
+$(document).ready ->
+  $("#add-bookmark").click ->
     alert "add bookmark of users"
     $.post bookmarks-path,#<%# bookmarks_path %>,
-      user_id: <%= current_user.user_id %>
+      user_id: 1#<%# current_user.user_id %>
       link: $("prependedInput").value()
-    
+  #Bookmark list click event
+  $(".bookmark-item").click ->
+    $(".bookmark-item").not(this).removeClass "selected"
+    $(this).addClass "selected"
+    id = $(this).find("input[type='hidden']").val()
+  
+  $(".tag-background").click ->
+    alert "ss"
+    $(this).appendTo("myTags")
+
+  # 打开添加标签筐
+  $(".tag-button").click ->
+    $(this).parent().children(".add-tags").show()
+    $(".has_tags").hide()
+
+  # 标记 加星 事件
+  $(".star").toggle ->
+    $(this).children("#star-icon").attr("class","icon-star")
+  , ->
+    $(this).children("#star-icon").attr("class","icon-star icon-white")
+
+  # tags data binding
+  $("#myTags").tagit
+    availableTags: ['ruby','rails'],
+
+  # 当 add-tags 失去焦点时隐藏它
+  $("#myTags input").blur ->
+    $(this).parents(".add-tags").hide()
+    tags = $("#myTags").tagit("assignedTags")
+    $(".has_tags").show()
+  # 设置 添加 书签 对话框 不隐藏背景
+  $("#add-mark").modal
+    backdrop: false,
+    show: false

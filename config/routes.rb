@@ -2,6 +2,7 @@ Markcase::Application.routes.draw do
 
   match '/' => 'application#index', :as => 'root'
   match '/home' => 'users#home', :as => 'home'
+  match '/reset-password' => 'settings#reset_password', :as => 'reset_password'
 
   resources :sessions
   resources :users
@@ -10,8 +11,10 @@ Markcase::Application.routes.draw do
   
   #admin namespace route
   match 'admin/login' => 'admin::sessions#new', :as => 'admin_login'
+  match 'admin/logout' => 'admin::sessions#destroy', :as => 'admin_logout'
   namespace :admin do 
     resources :users
+    resources :bookmarks
     resources :sessions
   end
   # The priority is based upon order of creation:

@@ -1,6 +1,6 @@
 class BookmarksController < ApplicationController
 
-  expose(:user)
+  expose(:user) { User.find(current_user.id) }
   expose(:bookmarks) { user.bookmarks} 
   expose(:bookmark)
 
@@ -30,16 +30,19 @@ class BookmarksController < ApplicationController
       bookmmark.on_star # scope :on_star, lambda { udpate_attribute(star: true)}
     end
   end
+  def inbox
+    
+  end
 
   def show_inbox_or_favorite
     case params[:show_type]
       when 'inbox'
         respond_to do |format|
-          format.json { render json: bookmark.where(inbox: true)}
+          format.json { render json: bookmarks.show_inbox }
         end
       when 'favorite'
         respond_to do |format|
-          format.json { render json: bookmark.where(star: true)}
+          format.json { render json: bookmarks.favorite }
         end
     end
   end

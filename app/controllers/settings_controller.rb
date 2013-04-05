@@ -1,6 +1,6 @@
 class SettingsController < ApplicationController
-  expose(:user)
-
+  expose(:user) { User.find(current_user.id) }
+=begin
   def update
     if user.update_attributes(params[:user]) 
       flash[:notice] = "successfully updated your information"      
@@ -10,9 +10,15 @@ class SettingsController < ApplicationController
       redirect_to settings_url
     end
   end
-  
+=end
   def reset_password
-    flash[:notice] = "reset password success" ,setting_url if user.reset_password params[:user]
+    if user.reset_password params
+      flash[:notice] = "reset password success" 
+      redirect_to settings_url
+    else
+      flash[:error] = "reset password error:#{user.errors.full_messages.join}" 
+      redirect_to settings_url
+    end
   end
 
 
