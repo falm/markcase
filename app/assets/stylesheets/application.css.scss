@@ -1,0 +1,208 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require twitter/bootstrap
+ *= require jquery-ui
+ *= require_self
+ *= require users
+ *= require jquery.tagit
+ *= require tagit.ui-zendesk
+ */
+
+
+
+/*==== Public CSS style =====*/
+
+body {
+	margin:0px;
+	padding:0px;
+	/*background:#e1e1e1; */
+  background:#dadee0 image-url("body-bg.png")
+}
+
+.body {
+	width:940px;
+	margin:0px auto;
+	margin-top:50px;
+}
+
+
+
+/*====Nav=====*/
+
+.nav-align{
+	width:940px;
+	margin:0px auto;
+}
+
+.navbar{
+	margin-bottom:50px;
+}
+
+
+.new-navbar{
+	background:#003366;
+	color:#FFF;
+}
+.new-navbar  .brand {
+  display: block;
+  float: left;
+  padding: 10px 20px 10px;
+  margin-left: -20px;
+  font-size: 20px;
+  font-weight: 200;
+  color: #FFF;
+  text-shadow: 0 1px 0 #777;
+}
+
+.new-navbar li a{
+	color:#FFF;
+}
+
+/*====Nav END=====*/
+
+
+
+/* left  */
+.left{
+	background:#f7f7f7;
+	padding-bottom:50px;
+	height:auto;
+	font-size:12px;
+	color:#000;
+	border:#CCC solid 1px;
+}
+
+.left .head{
+	/*width:80px;*/
+/*	height:100px;*/
+	/*text-align:center;*/
+	padding:10px;
+}
+
+.left a{
+	color:#000;
+	/*text-align:center;*/
+}
+
+/*==== right  ===*/
+.right{
+	background:#f7f7f7;
+	padding:10px;	
+	padding-bottom:50px;
+	height:auto;
+	font-size:12px;
+	color:#000;
+	border:#CCC solid 1px;
+}
+
+.right textarea{
+	width:180px;
+	height:40px;
+	background:#CCC;
+	-webkit-border-radius:10px;
+	color:#000;
+
+}
+.right h4{
+
+}
+.right .description{
+	width:180px;
+	
+	color:#999;
+}
+
+.right img{
+	width:180px;
+}
+
+.right a{
+	color:#000;
+	/*text-align:center;*/
+}
+
+
+
+/*==== center  ===*/
+
+.center a{
+	font-size:12px;
+	color:#000;
+	text-decoration:none;
+}
+
+.bookmark-list{
+	list-style:none;
+	width:auto;
+
+}
+
+.bookmark-item{
+	background:#f7f7f7;
+	padding:15px;
+	width:auto;
+	-webkit-border-radius:10px;
+	/*border-right:#06F solid 2px;*/
+}
+
+.selected{
+	background:#d9edf7;
+	border:#bce8f1 solid 2px;
+}
+
+.bookmark-item ul{
+	list-style:none;
+
+}
+
+.bookmark-item li{
+	float:left;
+	margin:5px;
+}
+
+/*===== Tag ====*/
+.tag-background{
+	height:10px;
+	background:#e8f3fd;
+	-webkit-border-radius:6px;
+	padding:4px;
+}
+
+.add-tags{
+	display:none;
+}
+
+#myTags{
+/*width:200px;*/
+
+
+}
+
+
+
+/*======== Footer =========*/
+
+#footer {
+  height: 30px;
+  width:940px;
+  margin:0px auto;
+  padding:20px;
+
+}
+
+/*======== Footer END=========*/
+
+@import "application/index"
+/*
+@import "sessions"
+@import "bookmarks"
+@import "users"
+*/

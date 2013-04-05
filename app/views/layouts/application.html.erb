@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Markcase</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="<%= controller_name %>">
+<!-- Navbar  -->
+<div class="navbar navbar-inverse  navbar-fixed-top">
+	<div class="navbar-inner">
+    <div class="nav-align">
+    	<div class="container" style="width:auto;">
+        <!-- Navbar Logo -->
+        <a class="brand" href="#">Markcase</a>
+        <!-- Navbar link -->
+        <ul class="nav">
+          <li class="active">
+            <%= link_to "首页", root_path%>
+          </li>
+          <% if controller_name == "users"%>
+            <li><a href="#add-mark" data-toggle="modal">添加书签</a></li>
+          <% end %>
+        </ul>
+        <!-- Navbar link END-->
+        <!-- User Info -->
+        <ul class="nav pull-right">
+          <% unless current_user %>
+            <li>
+              <a name="relink" data-toggle="modal" href="#register-Modal">注册</a>
+            </li>
+            <li class="dropdown">
+              <a  name="llink" data-toggle="modal" href="#login-Modal">登陆</a>
+            </li>
+          <% else %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="icon-user icon-white"></i><%= current_user.username %><b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "个人设置", settings_path %></li>
+                <li class="divider"></li>
+                <li><%= link_to "退出", sessions_path, method: :delete %></li>                  
+              </ul>
+            </li>            
+          <% end %>
+        </ul>     
+        <!-- User Info END -->       
+de      </div>    
+  </div>
+    </div>
+</div>
+<!-- Navbar END -->
+
+<div class="body">
+  <% if flash[:notice] %>
+    <h4><%= flash[:notice]%></h4>
+  <% end %>
+  <%= yield %>
+</div>
+
+<div id="footer">
+
+  <div class="container">
+
+    <p class="muted credit">Markcase by <a href="#">falm</a> .</p>
+
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,7 @@
+
+development:
+  adapter: mysql2
+  host: localhost
+  database: markcase_development
+  username: root
+  password: jay

@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<title>后台登陆</title>
+
+
+
+<script src="js/jqBootstrapValidation.js"></script>
+
+  <%= stylesheet_link_tag     "admin", media: "all" %>
+  <%= javascript_include_tag  "application" %>
+  <%= csrf_meta_tags %>
+</head>
+
+
+
+<body id="<%= controller_name %>">
+
+    <div class="login-container">
+
+
+      <%= form_tag admin_sessions_path, class: 'form-signin' do %>
+        <h2 class="form-signin-heading">登陆后台</h2>
+        <%= text_field_tag :username, params[:username], class: "input-block-level", placeholder: "用户名" %> 
+        <%= text_field_tag :password, params[:password], class: "input-block-level", placeholder: "密码" %> 
+        <label class="checkbox">
+          <input type="checkbox" value="remember-me"> 
+        </label>
+        <%= submit_tag "登录", class: "btn btn-large btn-primary" %> 
+      <% end %>
+
+    </div>
+
+</body>
+
+</html>
+
+
+
+
+

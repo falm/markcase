@@ -1,0 +1,69 @@
+// Place all the styles related to the users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body.users{
+
+
+ul#nav li {
+
+    padding:0;
+
+}
+
+
+
+.myform {
+
+    padding:20px 0px;
+
+}
+
+.myform div.line {
+
+    clear:both;
+
+    min-height:50px;
+
+    margin-bottom:15px;
+
+}
+
+.myform label {
+
+    display:block;
+
+    font-weight:bold;
+
+    margin-bottom:5px;
+
+}
+
+
+
+#events_container {
+
+    font-size:.8em;
+
+}
+
+
+
+.add-tags{
+
+  height:60px;
+
+}
+
+
+
+.head{
+
+  text-align:center;
+
+}
+
+}
+//@import "jquery.tagit"
+//@import "tagit.ui-zendesk"
+
