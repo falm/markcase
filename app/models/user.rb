@@ -2,7 +2,9 @@ class User < ActiveRecord::Base
   attr_accessible :description, :email, :password, :username, :password_confirmation
   validates_presence_of :username, :email 
   validates_confirmation_of :password, message: "towice password not equal"
+
   has_many :bookmarks  
+  has_many :categories
     
     
   def password

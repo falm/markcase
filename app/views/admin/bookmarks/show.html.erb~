@@ -1,0 +1,27 @@
+<article class="module width_3_quarter">
+  <header><h3 class="tabs_involved">书签管理</h3></header>
+    <div class="tab_container">
+      <div id="tab1" class="tab_content">
+        <table class="table">
+          <tr> 
+            <td>书签链接：</td>
+            <td><%= link_to bookmark.link, "http://#{bookmark.link}" %></td>
+          </tr>
+          <tr> 
+            <td>所有者：</td>
+            <td><%= link_to bookmark.user.username, admin_user_path(bookmark.user)%></td>
+          </tr>
+          <tr> 
+            <td>标签：</td>
+            <td>
+              
+              <% bookmark.tag_list.each do |tag|%>
+                
+                <%= link_to tag,tag_admin_bookmarks_path(tag) %>
+              <% end %>
+            </td> 
+          </tr>          
+        </table>
+      </div>
+    </div>
+</article><!-- end of content manager user -->

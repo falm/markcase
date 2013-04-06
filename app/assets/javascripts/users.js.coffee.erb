@@ -5,6 +5,7 @@
 
 #add_bookmark = (data) ->  
 #  ajax.
+
 $(document).ready ->
   $("#add-bookmark").click ->
     alert "add bookmark of users"
@@ -28,6 +29,7 @@ $(document).ready ->
 
   # 标记 加星 事件
   $(".star").toggle ->
+    alert "on star"
     $(this).children("#star-icon").attr("class","icon-star")
   , ->
     $(this).children("#star-icon").attr("class","icon-star icon-white")
@@ -45,3 +47,4 @@ $(document).ready ->
   $("#add-mark").modal
     backdrop: false,
     show: false
+

@@ -12,18 +12,22 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.ui
+//= require jquery.ui.all
 //= require twitter/bootstrap/modal
 //= require twitter/bootstrap/dropdown
 //= require twitter/bootstrap/alert
 //= require twitter/bootstrap/transition
-//= require_tree .
-//= require_self
 //= require jqBootstrapValidation
 //= require tag-it
-// require bootstrap-tags
+//= require users
+//= require bookmarks
+//= require sessions
+//= require settings
+//= require_self
+
 
 
   $(function(){
     $("input").jqBootstrapValidation();
   });
+  

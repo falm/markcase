@@ -36,7 +36,7 @@ text-decoration: underline;
 header#header {
 height: 55px;
 width: 100%;
-background: #222222 image-url("admin/header_bg.png") repeat-x;
+background: #222222 image-image-url("admin/header_bg.png") repeat-x;
 }
 
 header#header h1.site_title, header#header h2.section_title {

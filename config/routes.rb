@@ -13,8 +13,15 @@ Markcase::Application.routes.draw do
   match 'admin/login' => 'admin::sessions#new', :as => 'admin_login'
   match 'admin/logout' => 'admin::sessions#destroy', :as => 'admin_logout'
   namespace :admin do 
-    resources :users
-    resources :bookmarks
+    resources :users do 
+      resources :categories
+    end
+    #resources :categories 
+    resources :bookmarks do 
+      collection do 
+        get 'tags/:tag' => 'bookmarks#tags', :as => 'tags'
+      end
+    end
     resources :sessions
   end
   # The priority is based upon order of creation:

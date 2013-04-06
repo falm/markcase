@@ -6,7 +6,7 @@ gem 'rails', '3.2.13'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql2'
-gem 'passenger'
+#gem 'passenger'
 
 
 # Gems used only for assets and not required
@@ -19,11 +19,14 @@ group :assets do
   gem 'therubyracer', :platforms => :ruby
   #gem 'bootstrap-sass', '~> 2.3.1.0'
   gem 'uglifier', '>= 1.0.3'
+  #gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
+  gem 'jquery-ui-rails'
 end
 
 gem 'anjlab-bootstrap-rails', '>= 2.3', :require => 'bootstrap-rails'
 gem 'jquery-rails'
 gem 'decent_exposure'
+gem 'acts-as-taggable-on'
 
 group :development do 
   gem 'better_errors'

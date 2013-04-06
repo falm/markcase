@@ -1,5 +1,4 @@
-//
-//
+// 
 //
 //= require jquery
 //= require jquery_ujs
@@ -7,8 +6,10 @@
 //= require hideshow
 //= require jquery.equalHeight
 //= require jquery.tablesorter
+//= require jquery.ui.all
+//= require tag-it
 //= require_self
-//= require_directory .admin/
+//= require_directory ./admin
 
 $(document).ready(function(){ 
     $(".tablesorter").tablesorter(); 

@@ -69,7 +69,7 @@
 		    <article class="module width_3_quarter">
 		     
           <header><h3>添加收藏夹</h3></header>
-                <%= form_for [:admin,user,categories.build] do |f| %>
+                <%= form_for [admin,user,categories.build] do |f| %>
 				    <div class="module_content">
 						    <fieldset>
                   <%= f.label "名称" %>

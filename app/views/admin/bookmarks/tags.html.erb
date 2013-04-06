@@ -1,0 +1,31 @@
+<article class="module width_3_quar:Rter">
+  <header><h3 class="tabs_involved">书签管理</h3></header>
+    <div class="tab_container">
+      <div id="tab1" class="tab_content">
+      <table class="tablesorter display" cellspacing="0" id="bookmarks">
+        <thead>
+        <tr>
+          <th></th>
+          <th>书签链接</th>
+          <th>所有者</th>
+          <th>操作</th>
+        </tr>
+       </thead>
+       <tbody>
+        <% bookmarks_with_tag.each do |bookmark|%> 
+          <tr>
+            <td><input type="checkbox"></td>
+            <td><%= link_to bookmark.link,admin_bookmark_path(bookmark)%></td>
+            <td><%= bookmark.user.username %></td>
+            <td>
+            <%= link_to image_tag("admin/icn_edit.png"), edit_admin_bookmark_path(bookmark), title: "编辑"%>
+              
+            <%= link_to image_tag("admin/icn_trash.png"), admin_bookmark_path(bookmark), method: :delete, title: "删除" %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      </div>
+    </div>
+</article><!-- end of content manager article -->

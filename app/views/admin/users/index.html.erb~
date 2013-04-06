@@ -3,8 +3,7 @@
     <h3 class="tabs_involved">用户管理</h3>
 		<ul class="tabs">
    			<li><a href="#tab1">用户</a></li>
-    		<li><a href="#tab2">书签</a></li>
-    		<li><a href="#tab3">收藏夹</a></li>    		
+    		<li><a href="#tab2">Comments</a></li>
 		</ul>    
   </header>
     <div class="tab_container">

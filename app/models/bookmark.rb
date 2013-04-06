@@ -1,6 +1,9 @@
 class Bookmark < ActiveRecord::Base
-  attr_accessible :category_id, :inbox, :link, :note, :star, :title, :user_id
+  attr_accessible :category_id, :inbox, :link, :note, :star, :title, :user_id, :tag_list
   belongs_to :user
+  belongs_to :category
+
+  acts_as_taggable
 
   scope :off_star, lambda { update_attributes(star: false)}
   scope :on_star, lambda { udpate_attributes(star: true)}

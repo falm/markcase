@@ -1,4 +1,4 @@
-                <%= form_for [:admin,user] do |f|%>
+                <%= form_for user do |f|%>
 						    <fieldset>
                   <%= f.label "用户名"%>
                   <%= f.text_field :username %>

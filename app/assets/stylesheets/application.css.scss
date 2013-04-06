@@ -9,11 +9,15 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require twitter/bootstrap
- *= require jquery-ui
- *= require_self
+ #* require jquery.ui.all
+ *= require jquery.ui.core
  *= require users
  *= require jquery.tagit
  *= require tagit.ui-zendesk
+ *= require bookmarks
+ *= require sessions 
+ *= require settings 
+ *= require_self
  */
 
 

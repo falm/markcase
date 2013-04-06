@@ -1,6 +1,9 @@
 class Admin::UsersController < AdminController
   expose(:users)
   expose(:user)
+  expose(:categories) { user.categories }
+  expose(:bookmarks) { user.bookmarks}
+  expose(:bookmark) { user.bookmarks.build }
   
   def create
     if user.save 

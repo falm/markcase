@@ -1,12 +1,8 @@
-# Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-jQuery ->
-  $("#users").dataTable
-    bJqueryUI: true
 
-$(document).ready ->
+ $(document).ready ->
   $("#bookmarkTags").tagit
     availableTags: ["rails", "ruby"]
 
@@ -18,4 +14,4 @@ $(document).ready ->
   $("#bookmarkTags").tagit
     afterTagRemoved: (event,ui)->
       tags_string = $("#bookmarkTags").tagit("assignedTags").toString()
-      $("#bookmark_tag_list").val(tags_string)   sPaginationiType: "full_number"
+      $("#bookmark_tag_list").val(tags_string)

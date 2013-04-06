@@ -1,0 +1,36 @@
+                <%= form_for [:admin,bookmark] do |f|%>
+						    <fieldset>
+                  <%= f.label "链接"%>
+                  <%= f.text_field :link %>
+						    </fieldset>
+						    <fieldset>
+                  <%= f.label "所有者" %>
+							    <% users_array = User.order(:username).map { |user| [user.username,user.id]} %>
+							    <%= f.select :user_id, options_for_select(users_array), style: "width:92%;" %>                  
+						    </fieldset>
+						    <fieldset style="width:48%; float:left; margin-right: 3%;"> <!-- to make two field float next to one another, adjust values accordingly -->
+							    <%= f.label "收藏夹"%>
+
+							    <% categories_array = Category.order(:id).map { |c| [c.title,c.id] } %>
+							    <%= f.select :category_id,options_for_select(categories_array), style: "width:92%;"%>
+						    </fieldset>
+						    <fieldset style="width:48%; float:left;"> <!-- to make two field float next to one another, adjust values accordingly -->
+							    <%= f.label "标签"%>
+							    <!--<input type="text" style="width:92%;">-->
+							    <%= f.hidden_field :tag_list %>
+							    <ul id="bookmarkTags" class="pull-left" style="width:80%; float:left; margin-right: 3%;">
+                    <% bookmark.tag_list.each do |tag| %>
+                      <li><%= tag %></li>
+                    <% end %>
+                  </ul>
+                  <button type="button" id="save-tags">save</button>
+						    </fieldset><div class="clear"></div>
+				    </div>
+			    <footer>
+				    <div class="submit_link">
+
+              <%= f.submit "提交", class: "alt_btn", id: "save-boomark"%>
+              <%= f.button "重置", type: :reset %>
+				    </div>
+			    </footer>
+          <% end %>
