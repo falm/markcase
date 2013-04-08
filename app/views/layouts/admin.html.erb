@@ -47,7 +47,7 @@
     <ul class="toggle">
       <li class="icn_add_user"><%= link_to "添加一个新用户", new_admin_user_path %></li>
       <li class="icn_view_users"><%= link_to "查看用户", admin_users_path %></li>
-      <li class="icn_profile"><%= link_to "编辑用户", user ? admin_users_path : edit_admin_user_path(user) %></a></li>
+      <li class="icn_profile"><%= link_to "编辑用户", admin_users_path %></a></li>
     </ul>
     <h3>媒体管理</h3>
     <ul class="toggle">
@@ -74,13 +74,17 @@
     <% if flash[:notice]%>
       <div class="alert alert-success">
         <button class="close" data-dismiss="alert" type="button">&times;</button>
-        <h4 class="alert_success"><%= flash[:notice] %></h4>
+        <h4 class="alert_success"><%= flash[:notice] %>
+          <button class="close" data-dismiss="alert" type="button">&times;</button>
+        </h4>
       </div>
     <% end %>
     <% if flash[:error]%>
       <div class="alert alert-error alert_error">
         <button class="close" data-dismiss="alert" type="button">&times;</button>
-        <h5><%= flash[:error] %></h5>
+        <h4><%= flash[:error] %>
+          <button class="close" data-dismiss="alert" type="button">&times;</button>
+        </h4>
       </div>
     <% end %>
     <%= yield %>

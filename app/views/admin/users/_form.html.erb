@@ -4,6 +4,20 @@
                   <%= f.text_field :username %>
 						    </fieldset>
 						    <fieldset>
+                  <%= f.label "邮箱"%>
+                  <%= f.email_field :email %>
+						    </fieldset>
+                <% if action_name == "new"%>
+						      <fieldset>
+                    <%= f.label "密码"%>
+                    <%= f.password_field :password %>
+						      </fieldset>
+						      <fieldset>
+                    <%= f.label "确认密码"%>
+                    <%= f.password_field :password_confirmation %>
+						      </fieldset>
+                <% end %>
+						    <fieldset>
                   <%= f.label "个性签名" %>
                   <%= f.text_area :description, rows: 12 %>
 						    </fieldset>

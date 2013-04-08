@@ -5,6 +5,7 @@ class Admin::UsersController < AdminController
   expose(:bookmarks) { user.bookmarks}
   expose(:bookmark) { user.bookmarks.build }
   
+
   def create
     if user.save 
       redirect_to admin_users_url, notice: "Successfully Created user"
@@ -25,7 +26,22 @@ class Admin::UsersController < AdminController
 
   def destroy
     user.destroy
-    redirect_to admin_users_url, notice: "Successfully Destroyed user"
+    respond_to do |format|
+      format.html {    
+        redirect_to admin_users_url, notice: "Successfully Destroyed user" }
+      format.json { render json: { :message => "user has been deleted"} }
+    end
+  end
 
+  def get_bookmarks
+    if params[:user_id]
+      @bookmarks_for = user.bookmarks
+    else
+      @bookmarks_for = Bookmark.order(:link)
+    end
+    respond_to do |format|
+      format.json { render json: @bookmarks_for}
+    end
+    
   end
 end
