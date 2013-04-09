@@ -1,0 +1,52 @@
+# Place all the behaviors and hooks related to the matching controller here.
+# All this logic will automatically be available in application.js.
+# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+
+
+
+$(document).ready ->
+  
+  exports = this
+  exports.user_ids = new Array
+  #加载 bookmarks 数据到 ajax方法
+  #$(".tabs li a[href='#tab2']").click ->
+  load_bookmark = (id)->
+    $.get "/admin/users/get_bookmarks/#{id}.json",  (data) ->
+      tbody = $("#bookmarks-list")
+      tbody.remove()
+      for bookmark in data
+        tbody.append("<tr>")
+        tbody.append("<td><a href='/admin/bookmarks/#{bookmark.id}'>#{bookmark.link}</a></td>")
+        tbody.append("<td>#{bookmark.title}</td>")
+        tbody.append("<td><a title='编辑' href='/admin/bookmarks/#{bookmark.id}/edit'><img src='/assets/admin/icn_edit.png' /></a>
+          <a title='删除' data-method='delete' href='/admin/bookmarks/#{bookmark.id}'><img src='/assets/admin/icn_trash.png' /></a></td>")
+        tbody.append("</tr>")
+    ,"json"
+
+
+  $("#bookmarkTags").tagit
+    availableTags: ["rails", "ruby"]
+ 
+  $("#bookmarkTags input").blur ->
+    tags_string = $("#bookmarkTags").tagit("assignedTags").toString()
+    $("#bookmark_tag_list").val(tags_string)
+
+  $("#bookmarkTags").tagit
+    afterTagRemoved: (event,ui)->
+      tags_string = $("#bookmarkTags").tagit("assignedTags").toString()
+      $("#bookmark_tag_list").val(tags_string)   sPaginationiType: "full_number"
+
+  $("#users-item").change ->
+    exports.user_ids.pop $(this).val()
+
+  $("#users tr").click ->
+    $("#users tr").not(this).removeClass "selected"
+    $(this).addClass "selected"
+    exports.user_id = $(this).children().children().val()
+
+  $("a[data-method='delete']").on "ajax:success", (e,data, textStatus, jqXHR) ->
+    $(this).parents("tr").remove()
+
+  #加载 bookmarks 数据到 ajax方法
+  $(".tabs li a[href='#tab2']").click ->
+    load_bookmark(exports.user_id)

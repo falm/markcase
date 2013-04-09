@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   attr_accessible :description, :email, :password, :username, :password_confirmation
-  validates_presence_of :username, :email 
+  validates_presence_of :username, :email ,:password
   validates_confirmation_of :password, message: "towice password not equal"
 
   has_many :bookmarks  
@@ -25,8 +25,8 @@ class User < ActiveRecord::Base
     end
   end
 
-  def self.authenticate(user,pwd)
-    user = User.find_by_username(user)
+  def self.authenticate(email,pwd)
+    user = User.find_by_email(email)
     if user && Digest::SHA256.hexdigest(user.salt + pwd)==
         user.hashed_password
       return user

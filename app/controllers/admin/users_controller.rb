@@ -34,14 +34,15 @@ class Admin::UsersController < AdminController
   end
 
   def get_bookmarks
-    if params[:user_id]
-      @bookmarks_for = user.bookmarks
-    else
-      @bookmarks_for = Bookmark.order(:link)
-    end
     respond_to do |format|
-      format.json { render json: @bookmarks_for}
+      format.json { render json: bookmarks }
     end
-    
   end
+
+  def get_categories
+    respond_to do |format|
+      format.json { render json: categories}
+    end
+  end
+
 end

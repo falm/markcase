@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   expose(:users)
-  expose(:user)
+  expose(:user) { User.find(current_user.id)}
+  expose(:categories) { user.categories}
+  expose(:bookmarks) { user.bookmarks}
 
   def create
     @user = User.register(params)

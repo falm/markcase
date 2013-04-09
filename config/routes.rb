@@ -15,6 +15,10 @@ Markcase::Application.routes.draw do
   namespace :admin do 
     resources :users do 
       resources :categories
+      collection do 
+        get 'get_bookmarks/:user_id' => 'users#get_bookmarks', :as => 'get'
+        get 'get_categories/:user_id' => 'users#get_categories', :as => 'get'
+      end
     end
     #resources :categories 
     resources :bookmarks do 

@@ -1,13 +1,7 @@
 
 <!--<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"> -->
 
-<script src="js/jquery-ui-1.9.2.custom.min.js" type="text/javascript" charset="utf-8"></script>
-
-
-<script language="javascript"  src="js/home.js"></script>
-
-
-
+<!--<script src="js/jquery-ui-1.9.2.custom.min.js" type="text/javascript" charset="utf-8"></script>-->
 
 
 <div class="row-fluid">
@@ -25,12 +19,12 @@
         <li><a href="#"><i class="icon-star"></i>  &nbsp;喜欢</a></li>  
         <li class="divider"></li>
         <li class="nav-header">收藏夹</li>
-        <li><a href="#"><i class="icon-folder-open"></i> &nbsp;One<i class="pull-right icon-remove"></i></a></li>
+        <% categories.each do |category|%>
+          <li><%= link_to "<i class='icon-folder-open'></i>#{category.title}<i class='pull-right icon-remove'></i>", class: "icon-folder-open" %></li>
+        <% end %>
         <li><a data-toggle="modal" href="#myModal"><i class="icon-plus"></i>  &nbsp;创建收藏夹</a></li>          
         <li class="divider"></li>
         <li class="nav-header">标签</li>                              
-				<li><a href="#"><i class="icon-tag"></i> &nbsp;ruby</a></li>
-				<li><a href="#"><i class="icon-tag"></i> &nbsp;rails</a></li>                    
       </ul>
     </div>
     <!-- left END -->
@@ -39,39 +33,37 @@
     <!-- center  -->  
     <div class="center">
       <ul class="bookmark-list media-list">
+        <% bookmarks.each do |bookmark|%>
         <li class="media bookmark-item selected">
           <input type="hidden" value="1" id="id">
           <div class="media-body">
-          <h4 class=" media-heading">  Ruby china</h4>
-          <a href="http://ruby-china.org">ruby-china.org</a>             
+          <h4 class=" media-heading"><%= bookmark.title%></h4>
+          <%= link_to bookmark.link, "http://#{bookmark.link}" %>
           <a href="#" title="喜欢" class="star"><i id="star-icon" class="icon-star icon-white"></i></a>
           <a href="#" title="添加标签"   class="tag-button"><i class="icon-tags"></i></a>
           <ul class="has_tags pull-right">
-            <li><a href="#" class="tag-background">ruby</a></li>
-            <li><a href="#" class="tag-background">rails</a></li>
+            <% bookmark.tag_list.each do |tag|%>
+              <li><%= link_to tag, class: "" %></li>
+            <% end %>
           </ul>                             
           </br></br>              
           <div class="add-tags">
             <div class="row">
               <div class="span10">
                 <ul id="myTags" class="pull-right">
-                  <li>rails</li>
+                  <% bookmark.tag_list.each do |tag|%>
+                  <li><%= tag %></li>
+                  <% end %>
                 </ul>
               </div>
               <div class="span2">
-                <a class="btn" id="tag-save">保存</a>
+                <!--<a class="btn" id="tag-save">保存</a>-->
               </div>								
             </div>
-<!--       <div class="row">
-            <ul class="tags">
-              <li>常用标签：</li>
-              <li><a href="#" class="tag-background">ruby</a></li>
-              <li><a href="#" class="tag-background">rails</a></li>
-            </ul> 
-           </div>-->
           </div>                
         </div>
         </li> 
+        <% end %>
       </ul>
     </div>
     <!-- center END -->
