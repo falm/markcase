@@ -14,9 +14,21 @@
             <img data-src="holder.js/300x200"  src="<%= image_path("head.png")%>" class="img-polaroid">
           </div>
         </li>
-        <li><a href="#"><i class="icon-home"></i> &nbsp;主页</a></li>
-        <li><a href="#"><i class="icon-inbox"></i>  &nbsp;归档</a></li>                    
-        <li><a href="#"><i class="icon-star"></i>  &nbsp;喜欢</a></li>  
+        <li>
+          <%= link_to  home_path do  %>
+            <i class="icon-home"></i> &nbsp;主页
+          <% end %>
+        </li>
+        <li>
+          <%= link_to star_path, remote: true do%>
+            <i class="icon-inbox"></i>  &nbsp;归档
+          <% end %>
+        </li>                    
+        <li>
+          <%= link_to favorite_path, remote: true do%>
+            <i class="icon-star"></i>  &nbsp;喜欢
+          <% end %>
+        </li>  
         <li class="divider"></li>
         <li class="nav-header">收藏夹</li>
         <% categories.each do |category|%>
@@ -43,7 +55,7 @@
           <a href="#" title="添加标签"   class="tag-button"><i class="icon-tags"></i></a>
           <ul class="has_tags pull-right">
             <% bookmark.tag_list.each do |tag|%>
-              <li><%= link_to tag, class: "" %></li>
+              <li><%= link_to tag,  home_tag_path(tag),  class: "tag-background" %></li>
             <% end %>
           </ul>                             
           </br></br>              

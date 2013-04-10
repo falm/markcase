@@ -2,6 +2,7 @@ Markcase::Application.routes.draw do
 
   match '/' => 'application#index', :as => 'root'
   match '/home' => 'users#home', :as => 'home'
+  match '/home/tag/:tag' => 'users#home', :as => 'home_tag'
   match '/reset-password' => 'settings#reset_password', :as => 'reset_password'
 
   resources :sessions
