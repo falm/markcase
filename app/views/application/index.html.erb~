@@ -69,7 +69,7 @@
   <h2 class="form-signin-heading">登陆到MarkCase</h2>
   <div class="control-group">
     <div class="controls">
-      <p class=" help-block"></p>
+      <p class=" help-block"></p>-->
       <%= email_field_tag  :email, params[:email], class: "input-block-level ", 
         placeholder: "邮箱地址", "data-validation-email-message" => "邮箱格式不正确！", required: :required %>
     </div>

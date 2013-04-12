@@ -77,8 +77,8 @@ $(document).ready ->
   $(".tabs li a[href='#tab3']").click ->
     $("#categories-list > tbody").empty()
     load_categories(exports.user_id)
-  $(".pagination a").attr("data-remote",'true')
-  $(".pagination a").on "click", ->
+  $(".pagination a").attr("data-remote",'true')   
+  $(".flickr_pagination a").on "click", ->
     $.getScript(this.href)
     false    
 

@@ -1,50 +1,143 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-
-#add_bookmark = (data) ->  
-#  ajax.
+<%# environment.context_class.instance_eval { include BookmarksHelper}%>
 
 $(document).ready ->
+  exports = this
+  exports.bookmarks_ids = new Array
+
   $("#add-bookmark").click ->
     alert "add bookmark of users"
     $.post bookmarks-path,#<%# bookmarks_path %>,
       user_id: 1#<%# current_user.user_id %>
       link: $("prependedInput").value()
-  #Bookmark list click event
-  $(".bookmark-item").click ->
+
+  # bookmarks change method
+  bookmark_change = (data) ->
+    $.post "/bookmarks/#{exports.bookmark_id}", { bookmark: { tag_list:  data.toString() }, _method: 'PUT'}, (data) ->
+      element = $(".has_tags[data-id='#{exports.bookmark_id}']")
+      #alert data.message
+      html = ""
+      for tag in data.taglist
+        html+="
+          <li>
+            <a href='#' class='tag-background'>#{tag}</a>
+          </li>
+        "
+      element.html html
+    ,"json"
+   
+  $(".bookmark-item").draggable()
+  #Bookmark item click event
+  $(document).on "click", ".bookmark-item", ->
     $(".bookmark-item").not(this).removeClass "selected"
     $(this).addClass "selected"
-    id = $(this).find("input[type='hidden']").val()
-  
-  $(".tag-background").click ->
-    alert "ss"
-    $(this).appendTo("myTags")
+    exports.bookmark_id = $(this).find("input[type='hidden']").attr("name")
+    $.get "/bookmarks/note.json", { t_id: exports.bookmark_id}, (data)->
+      $(".bookmark_note").val data.note
+    , "json"
 
-  # 打开添加标签筐
-  $(".tag-button").click ->
+
+  # 打开添加标签筐 并绑定 tag-it 事件
+  $(document).on "click", ".tag-button", ->
     $(this).parent().children(".add-tags").show()
-    $(".has_tags").hide()
+    $(".has_tags[data-id='#{exports.bookmark_id}']").hide()
+    $(".add-tags").tagit
+      availableTags: ['ruby','rails'],
+      afterTagRemoved: (event, ui) ->
+        tags = $(this).tagit("assignedTags")
+        bookmark_change(tags)
+      , afterTagAdded: (event, ui) ->
+        tags = $(this).tagit("assignedTags")
+        bookmark_change(tags)
 
   # 标记 加星 事件
-  $(".star").toggle ->
-    alert "on star"
-    $(this).children("#star-icon").attr("class","icon-star")
-  , ->
-    $(this).children("#star-icon").attr("class","icon-star icon-white")
+  change_star = (url,bool) ->
+    $.post url, { bookmark: { star: bool}, '_method': 'PUT'}, (data)->
+      alert data.message
+    ,'json'
 
-  # tags data binding
-  $("#myTags").tagit
-    availableTags: ['ruby','rails'],
+  $(document).on "click", ".bookmark-star", ->
+    icon = $(this).children()
+    #alert icon.attr("class") == "icon-star "
+    if icon.attr("class") == "icon-star "
+      icon.addClass("icon-white")
+      change_star(this.href,false)
+    else
+      icon.removeClass("icon-white")
+      change_star(this.href,true)
+
 
   # 当 add-tags 失去焦点时隐藏它
-  $("#myTags input").blur ->
-    $(this).parents(".add-tags").hide()
-    tags = $("#myTags").tagit("assignedTags")
-    $(".has_tags").show()
+  $(document).on "blur", ".add-tags input", ->
+    tag_list = $(this).parents(".add-tags")
+    tag_list.hide()
+    $(".has_tags[data-id='#{exports.bookmark_id}']").show()
+
   # 设置 添加 书签 对话框 不隐藏背景
   $("#add-mark").modal
     backdrop: false,
     show: false
+  $("#myModal").modal
+    backdrop: false
+    show: false
 
+  # show inbox bookmarks
+  $(".inbox").on 'click', ->
+    $.getScript("#{this.href}.js")
+    false
+  # show favorite bookmarks
+  $(".favorite").on 'click', ->
+    $.getScript("#{this.href}.js")
+    false
+
+  # show bookmarks of current category
+  $(".categories-list").on 'click', ->
+    $.getScript(this.href+'.js')
+    false
+
+  # bookmark note change event
+  $(".bookmark_note").blur ->
+    $.post "bookmarks/#{exports.bookmark_id}", { bookmark: { note: $(this).val()}, '_method': 'PUT'}, (data)->
+      alert data.message
+
+  # show controls bar when checkbox checked
+  $subbox = $(".bookmark-item input[type='checkbox']")
+  $(".bookmark-item input[type='checkbox']").click ->
+    $("#select-all").attr("checked",
+      $subbox.length == $(".bookmark-item input[type='checkbox']:checked").length ? true : false )
+  $("#select-all").click ->
+    $("input[type='checkbox']").not(this).attr("checked",this.checked)
+
+  $(".bookmark-delete").click ->
+    $('.bookmark-item input[type="checkbox"]:checked').each ->
+      alert this.val()
+      exports.bookmarks_ids.push this.val()
+    alert exports.bookmarks_ids.toString()
+    $.post this.href, { id: exports.bookmark_ids  }, (data) ->
+      alert data.message
+    ,'json'
+
+  # create category ajax success event
+  $(".category-form").on "ajax:success", (e, data, textStatus,jqXHR) ->
+    alert data.message
+
+  # show bookmarks of current tag
+  $(document).on "click", ".tag-link", ->
+    $.getScript(this.href+'.js')
+    false
+
+  $(".pagination a").attr('data-remote','true')
+
+  # pagination click event
+  $(document).on "click", ".pagination a",->
+    $.getScript(this.href)
+    false
+
+  $('.more-tags').on 'ajax:success', (e, data, textStatus,jqXHR) ->
+    list = ("#bookmark-list")
+    html = ""
+    for tag in data
+      html += "
+        <li>#{tag}</li>
+      "
+    list.html html

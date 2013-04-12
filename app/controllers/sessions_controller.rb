@@ -5,10 +5,10 @@ class SessionsController < ApplicationController
     if @user
       session[:user] = @user
       flash[:notice] = "Welcome  #{@user.username}"
-      redirect_to root_path
+      redirect_to home_path
     else
       flash[:error] = "The username or password are incorrect"
-      redirect_to home_path
+      redirect_to root_path
     end
   end
   def destroy

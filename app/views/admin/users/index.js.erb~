@@ -1,0 +1,7 @@
+$(".pagination a").attr("data-remote",'true')
+
+$("#users-list").html("<%= escape_javascript(render 'users') %>");
+$(".pagination a").on("click",function(){
+  $.getScript(this.href);
+  return false;
+});

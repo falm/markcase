@@ -5,7 +5,7 @@
  *= require_self
  *= require jquery.ui.core
  *= require jquery.ui.theme
- # require twitter/bootstrap
+ *= require twitter/bootstrap
  *= require jquery.tagit
  *= require tagit.ui-zendesk
  *= require_directory ./admin

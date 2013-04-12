@@ -36,7 +36,7 @@ text-decoration: underline;
 header#header {
 height: 55px;
 width: 100%;
-background: #222222 image-image-url("admin/header_bg.png") repeat-x;
+background: #222222 image-url("admin/header_bg.png") repeat-x;
 }
 
 header#header h1.site_title, header#header h2.section_title {
@@ -572,7 +572,7 @@ html ul.tabs li:last-child, html ul.tabs li:last-child a  {
 	border-top-right-radius: 5px; border-bottom-right-radius: 5px;
 }
 
-#main .module header h3.tabs_involved {
+#main .module header h3.tabs_involveds {
 display: block;
 width: 60%;
 float: left;

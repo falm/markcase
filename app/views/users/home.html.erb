@@ -1,8 +1,7 @@
 
-<!--<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"> -->
+<!--<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"> 
 
-<!--<script src="js/jquery-ui-1.9.2.custom.min.js" type="text/javascript" charset="utf-8"></script>-->
-
+-->
 
 <div class="row-fluid">
   <div class="span3">
@@ -20,23 +19,29 @@
           <% end %>
         </li>
         <li>
-          <%= link_to star_path, remote: true do%>
+          <%= link_to bookmark_path(params[:show_type]='inbox'), remote: true, "data-type" => "json", class: "inbox" do %>
             <i class="icon-inbox"></i>  &nbsp;归档
           <% end %>
         </li>                    
         <li>
-          <%= link_to favorite_path, remote: true do%>
+          <%= link_to bookmark_path(params[:show_type]='favorite'), remote: true, "data-type" => "json", class: "favorite" do %>
             <i class="icon-star"></i>  &nbsp;喜欢
           <% end %>
         </li>  
         <li class="divider"></li>
         <li class="nav-header">收藏夹</li>
-        <% categories.each do |category|%>
-          <li><%= link_to "<i class='icon-folder-open'></i>#{category.title}<i class='pull-right icon-remove'></i>", class: "icon-folder-open" %></li>
-        <% end %>
+          <%= render 'categories' %> 
         <li><a data-toggle="modal" href="#myModal"><i class="icon-plus"></i>  &nbsp;创建收藏夹</a></li>          
         <li class="divider"></li>
         <li class="nav-header">标签</li>                              
+        <% ActsAsTaggableOn::Tag.limit(5).order('id desc').each do |tag| %>
+          <li>
+            <%= link_to  tag_bookmarks_path(tag.name), class: "tag-link" do %>
+              <i class="icon-tag"></i> <%= tag.name %>
+            <% end %>
+          </li>
+        <% end %>
+        <li><%= link_to "更多标签", tags_bookmarks_path, class: "more-tags", remote: true, format: "json" %><li>
       </ul>
     </div>
     <!-- left END -->
@@ -44,39 +49,29 @@
   <div class="span6">
     <!-- center  -->  
     <div class="center">
-      <ul class="bookmark-list media-list">
-        <% bookmarks.each do |bookmark|%>
-        <li class="media bookmark-item selected">
-          <input type="hidden" value="1" id="id">
-          <div class="media-body">
-          <h4 class=" media-heading"><%= bookmark.title%></h4>
-          <%= link_to bookmark.link, "http://#{bookmark.link}" %>
-          <a href="#" title="喜欢" class="star"><i id="star-icon" class="icon-star icon-white"></i></a>
-          <a href="#" title="添加标签"   class="tag-button"><i class="icon-tags"></i></a>
-          <ul class="has_tags pull-right">
-            <% bookmark.tag_list.each do |tag|%>
-              <li><%= link_to tag,  home_tag_path(tag),  class: "tag-background" %></li>
-            <% end %>
-          </ul>                             
-          </br></br>              
-          <div class="add-tags">
-            <div class="row">
-              <div class="span10">
-                <ul id="myTags" class="pull-right">
-                  <% bookmark.tag_list.each do |tag|%>
-                  <li><%= tag %></li>
-                  <% end %>
-                </ul>
-              </div>
-              <div class="span2">
-                <!--<a class="btn" id="tag-save">保存</a>-->
-              </div>								
-            </div>
-          </div>                
+      <%= form_tag  destroy_multiple_bookmarks_path, method: :delete do %>
+      <div class=" control_bar">
+        <div class="span2">
+          <%= check_box_tag "select-all",params[:ids]%> 全选
         </div>
-        </li> 
-        <% end %>
+        <div class="span5  input-append "> 
+            <% categories_array = categories.map { |c| [c.title,c.id]}%>
+            <%= select_tag "category_id", options_from_collection_for_select(categories,'id','title'), class: 'span5'%>
+            <%= button_tag "移动至收藏夹", class: "btn", name: "move_button" %>
+        </div>
+        <div class="span5 btn-group">
+          <%= button_tag  class: 'btn btn-danger', name: "destroy_button" do %>
+            <i class="icon-trash icon-white"></i> 删除选中
+          <% end %>
+          <%= button_tag class: 'btn btn-inverse', name: "inbox_button" do  %>
+            <i class="icon-inbox icon-white"></i> 归档 
+          <% end %>
+        </div>
+      </div>
+      <ul class="bookmark-list media-list">
+        <%= render 'bookmarks'%>
       </ul>
+      <% end %>
     </div>
     <!-- center END -->
   </div>
@@ -91,9 +86,6 @@
       <form>
         <textarea class="bookmark_note" placeholder="还没有笔记呢..." ></textarea>
       </form>
-      <ul id="twoTags">
-        <li>rails</li>
-      </ul>                
     </div>
     <!-- right END -->
   </div>        
@@ -101,34 +93,35 @@
 
 
 <!-- Alert -->
-<div class="modal fade" id="myModal">
+<%= form_tag categories_path, class: 'modal fade category-form', id: 'myModal', format: 'json' do %>
   <div class="modal-header">
     <a class="close" data-dismiss="modal">×</a>
     <h3>创建收藏夹</h3>
   </div>
   <div class="modal-body">
     <p>收藏夹标题</p>
-    <form>
-    	<input type="text" name="favorite" class="favorite"/>
-    </form>
+      <%= text_field_tag "category[title]"%>
   </div>
   <div class="modal-footer">
     <a href="#" class="btn" data-dismiss="modal">关闭</a>
-    <a href="#" class="btn btn-primary">保存</a>
+    <%= submit_tag "保存", class: "btn btn-primary"%>
   </div>
-</div>
+<% end %>
 
-<div class="modal fade" id="add-mark">
+
+<%= form_tag bookmarks_path, class: "modal fade", id: "add-mark" do %>
   <div class="modal-header">
     <a class="close" data-dismiss="modal">×</a>
     <h3>添加书签</h3>
   </div>
   <div class="modal-body">
     <div class="input-prepend input-append">
-    	<span class="add-on">http://</span><input class="span4" id="prependedInput" size="16" type="text"><button class="btn" type="button" id="add-bookmark" >添加</button>
-	</div>
+      <span class="add-on">http://</span>
+      <%= text_field_tag "bookmark[link]" %>
+      <%= submit_tag "添加", class: "btn"%>
+	  </div>
   </div>
-</div>
+<% end %>
 <!-- Alert END-->
 
 

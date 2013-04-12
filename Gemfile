@@ -27,7 +27,11 @@ gem 'anjlab-bootstrap-rails', '>= 2.3', :require => 'bootstrap-rails'
 gem 'jquery-rails'
 gem 'decent_exposure'
 gem 'acts-as-taggable-on'
+gem 'will_paginate'
+gem 'will_paginate-bootstrap'
 
+gem 'nokogiri'
+#gem 'rest-open-uri'
 group :development do 
   gem 'better_errors'
   gem 'binding_of_caller'

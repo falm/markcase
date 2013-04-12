@@ -9,7 +9,6 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require twitter/bootstrap
- #* require jquery.ui.all
  *= require jquery.ui.core
  *= require users
  *= require jquery.tagit
@@ -154,6 +153,7 @@ body {
 	padding:15px;
 	width:auto;
 	-webkit-border-radius:10px;
+  border:#ccc solid 1px;
 	/*border-right:#06F solid 2px;*/
 }
 

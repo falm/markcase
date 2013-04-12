@@ -9,32 +9,10 @@
   </header>
     <div class="tab_container">
       <div id="tab1" class="tab_content">
-      <table class="tablesorter display" cellspacing="0" id="users">
-        <thead>
-        <tr>
-          <th></th>
-          <th>用户名</th>
-          <th>邮箱地址</th>
-          <th>最后登录时间</th>
-          <th>操作</th>
-        </tr>
-       </thead>
-       <tbody>
-        <% users.each do |user|%> 
-          <tr>
-            <td><%= check_box_tag "users-item", user.id %></td>
-            <td><%= link_to user.username, admin_user_path(user)%></td>
-            <td><%= user.email %></td>
-            <td><%= user.updated_at %></td>
-            <td>
-            <%= link_to image_tag("admin/icn_edit.png"), edit_admin_user_path(user), title: "编辑" %>
-            <%= link_to image_tag("admin/icn_trash.png"), admin_user_path(user), method: :delete, title: "删除",
-              confirm: "Are you sure", remote: true, 'data-type' => 'json' %>
-            </td>
-          </tr>
-        <% end %>
-        </tbody>
-      </table>
+      <div id="users-list">
+        <%= render 'users' %>
+      </div>
+      
       </div>
       <div id="tab2" class="tab_content">
       <table class="tablesorter display" cellspacing="0" id="bookmarks-list">

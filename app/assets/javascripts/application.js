@@ -12,12 +12,14 @@
 //
 //= require jquery
 //= require jquery_ujs
+// require jquery.ui.core
 //= require jquery.ui.all
 //= require twitter/bootstrap/modal
 //= require twitter/bootstrap/dropdown
 //= require twitter/bootstrap/alert
 //= require twitter/bootstrap/transition
-//= require jqBootstrapValidation
+// require jqBootstrapValidation
+//= require jqBootstrapValidation.1.3.4
 //= require tag-it
 //= require users
 //= require bookmarks
@@ -28,6 +30,11 @@
 
 
   $(function(){
-    $("input").jqBootstrapValidation();
+    $("input").not("[type='submit']").not("[type='hidden']").jqBootstrapValidation({
+
+      submitSuccess: function($form,event){
+      }
+    });
+    $("form").submit(submitHandler);
   });
   

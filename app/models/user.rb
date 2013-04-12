@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
 
   has_many :bookmarks  
   has_many :categories
+
+  self.per_page = 3
     
     
   def password

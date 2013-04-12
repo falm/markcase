@@ -1,11 +1,19 @@
 class Admin::UsersController < AdminController
-  expose(:users)
+
+  expose(:users) { User.paginate(page: params[:page])}
   expose(:user)
   expose(:categories) { user.categories }
   expose(:bookmarks) { user.bookmarks}
   expose(:bookmark) { user.bookmarks.build }
-  
-
+     
+  def index
+    #@users = User.paginate(page: params[:page]) 
+    @users = users
+    respond_to do |format|
+      format.html  
+      format.js { render layout: false }
+    end
+  end
   def create
     if user.save 
       redirect_to admin_users_url, notice: "Successfully Created user"

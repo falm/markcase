@@ -2,7 +2,10 @@ class UsersController < ApplicationController
   expose(:users)
   expose(:user) { User.find(current_user.id)}
   expose(:categories) { user.categories}
-  expose(:bookmarks) { user.bookmarks}
+  expose(:bookmarks) { user.bookmarks.order("id desc").paginate(page: params[:page])}
+
+  def index
+  end
 
   def create
     @user = User.register(params)
@@ -24,8 +27,23 @@ class UsersController < ApplicationController
       redirect_to settings_url
     end
   end
-  
+
   def home
-    
+    get_bookmarks   
+    @categories = categories
+    @bookmarks = bookmarks.where(inbox: false)
+    respond_to   do |format|
+      format.html
+      format.js { render layout: false } 
+    end
+  end
+private 
+  def get_bookmarks
+    case params[:show_type]
+      when 'inbox'
+        @inbox_bookmarks = bookmarks.show_inbox 
+      when 'favorite'
+        @inbox_bookmarks = bookmarks.favorite
+    end
   end
 end
