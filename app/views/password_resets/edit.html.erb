@@ -1,0 +1,35 @@
+   <%= form_for @user, url: password_reset_path, html: { class: "form-horizontal" } do |f| %>
+      <fieldset>
+        <legend>设置密码</legend>  
+        <% if @user.errors.any? %>
+          <div class="control-group">
+            <ul>
+              <% for message in @user.errors %>          
+                <li> <%= message %></li>
+              <% end %>
+            </ul> 
+          </div>
+        <% end %>
+        <div class="control-group">
+          <%= f.label :password, "新密码", class: "control-label" %>
+          <div class="controls">
+            <%= f.password_field 'password', class: "input-xlarge", name: "user[password]", required: :required, "data-validation-required-message" => "不能空", name: "password", 
+             minLength: "6", "data-validation-minlength-message" => "密码必须大于6个字符"  %>
+            <p class="help-block"></p>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :password_confirmation, "确认新密码", class: "control-label" %>
+          <div class="controls">
+            <%= f.password_field :password_confirmation, class: "input-xlarge",
+             required: :required, "data-validation-required-message" => "不能空",
+             "data-validation-match-match" => "password", "data-validation-match-message" => "两次密码不一致" %>           
+             <p class="help-block"></p>
+          </div>
+        </div>   
+        <div class="form-actions">  
+          <%= f.submit "修改密码", class: "btn btn-primary" %>      
+        </div>    
+      </fieldset>
+    <% end %>  
+

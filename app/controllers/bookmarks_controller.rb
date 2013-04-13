@@ -1,5 +1,6 @@
+#encoding: utf-8
 class BookmarksController < ApplicationController
-
+  MAX_ATTEMPTS = 2
   expose(:user) { User.find(current_user.id) }
   expose(:bookmarks) { user.bookmarks} 
   expose(:bookmark)
@@ -31,9 +32,9 @@ class BookmarksController < ApplicationController
   end
 
   def update
-    if bookmark.update_attributes(params[:bookmark]) 
+    if user.tag(bookmark,with: params[:tags],on: :tags) 
       respond_to do |format|
-        format.json { render json: { taglist: bookmark.tag_list, message: "successfully updated bookmark"}}
+        format.json { render json: { taglist: bookmark.tags, message: "successfully updated bookmark"}}
       end
     else
       respond_to do |format|
@@ -72,9 +73,27 @@ class BookmarksController < ApplicationController
   end
 
   def tags
-    @tags = ActsAsTaggableOn::Tag.order(:id)
+    @tags = user.owned_tags.order(:id)
     respond_to  do |format|
       format.json { render json: @tags}
+    end
+  end
+
+  def description
+    require 'open-uri'
+    url = params[:url] 
+    url = "http://#{url}"
+    attempts = 0
+    begin
+      doc = Nokogiri::HTML(open(url)) 
+      description = doc.xpath("//meta[@name='description']/@content").text
+       
+    rescue Exception => e
+      attempts = attempts + 1
+      retry if attempts <= MAX_ATTEMPTS 
+    end
+    respond_to do |format|
+      format.json { render json: {description: description} }
     end
   end
 
@@ -101,7 +120,7 @@ class BookmarksController < ApplicationController
           return 
         end
       end
-      redirect_to home_url, "移动成功!"
+      redirect_to home_url, notice: "移动成功!"
     end
   end
 

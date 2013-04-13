@@ -1,7 +1,18 @@
-class Admin::CategoriesController < ApplicationController
+class Admin::CategoriesController < AdminController
   expose(:user)
   expose(:categories) { user.categories} 
   expose(:category)
+  expose(:bookmarks) { category.bookmarks.order(:id)}
+
+  def index
+    respond_to do |format|
+      format.html
+      format.js {
+        @categories = categories.order(:id).paginate(page: params[:page])
+        render layout: false
+      }
+    end
+  end
 
   def create
     if category.save

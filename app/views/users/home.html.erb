@@ -1,4 +1,3 @@
-
 <!--<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"> 
 
 -->
@@ -10,7 +9,8 @@
       <ul class="nav   nav-tabs nav-stacked">
         <li class="head">
           <div>
-            <img data-src="holder.js/300x200"  src="<%= image_path("head.png")%>" class="img-polaroid">
+            <!--<img data-src="holder.js/300x200"  src="<%= image_path("head.png")%>" class="img-polaroid">-->
+            <%= image_tag avatar_url(current_user,150)%>
           </div>
         </li>
         <li>
@@ -34,7 +34,7 @@
         <li><a data-toggle="modal" href="#myModal"><i class="icon-plus"></i>  &nbsp;创建收藏夹</a></li>          
         <li class="divider"></li>
         <li class="nav-header">标签</li>                              
-        <% ActsAsTaggableOn::Tag.limit(5).order('id desc').each do |tag| %>
+        <% user.owned_tags.limit(5).order('id desc').each do |tag| %>
           <li>
             <%= link_to  tag_bookmarks_path(tag.name), class: "tag-link" do %>
               <i class="icon-tag"></i> <%= tag.name %>
@@ -78,7 +78,7 @@
   <div class="span3 ">
     <!-- right -->
     <div class="right">
-      <h4> Ruby China</h4>
+      <h4 class="title-of-description"></h4>
       <img src="" />
       <p class="description">
                 Ruby China，对！没错！这里就是 Ruby 社区，目前这里已经是国内最权威的 Ruby 社区，
@@ -120,6 +120,8 @@
       <%= text_field_tag "bookmark[link]" %>
       <%= submit_tag "添加", class: "btn"%>
 	  </div>
+    <br/>
+    <small>按Enter确认</small>
   </div>
 <% end %>
 <!-- Alert END-->

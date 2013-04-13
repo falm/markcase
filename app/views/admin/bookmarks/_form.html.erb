@@ -16,9 +16,8 @@
 						    </fieldset>
 						    <fieldset style="width:48%; float:left;"> <!-- to make two field float next to one another, adjust values accordingly -->
 							    <%= f.label "标签"%>
-							    <%= f.hidden_field :tag_list %>
-							    <ul id="bookmarkTags" class="pull-left" style="width:80%; float:left; margin-right: 3%;">
-                    <% bookmark.tag_list.each do |tag| %>
+							    <ul id="bookmarkTags" class="pull-left" data-id="<%= bookmark.id%>" style="width:80%; float:left; margin-right: 3%;">
+                    <% bookmark.tags.each do |tag| %>
                       <li><%= tag %></li>
                     <% end %>
                   </ul>

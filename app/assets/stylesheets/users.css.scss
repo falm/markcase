@@ -65,9 +65,9 @@ ul#nav li {
 
 .control_bar{
   text-align:center; 
-  background:#33CCFF;
-  color: #fff;
-  /*border:#ccc solid 1px; */
+  /*background:#33CCFF;*/
+  color:#000;
+  border:#ccc dashed 2px;
   padding: 5px;
   padding-left: 5px;
   margin-bottom: 5px;
@@ -77,6 +77,14 @@ ul#nav li {
 #add-mark {
   /*margin:0px auto;*/
   width: 400px;
+}
+
+h4 a{
+  display:inline;
+}
+
+.category-remove {
+  display:none;
 }
 }
 

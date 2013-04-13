@@ -13,13 +13,20 @@
 <script src="js/jqBootstrapValidation.js"></script>
 
   <%= stylesheet_link_tag     "admin", media: "all" %>
-  <%= javascript_include_tag  "application" %>
+  <%= javascript_include_tag  "admin" %>
   <%= csrf_meta_tags %>
 </head>
 
 
 
 <body id="<%= controller_name %>">
+    <% if flash[:error]%>
+      <div class="alert alert-error alert_error">
+        <h4><%= flash[:error] %>
+          <button class="close" data-dismiss="alert" type="button">&times;</button>
+        </h4>
+      </div>
+    <% end %>
 
     <div class="login-container">
 
@@ -27,7 +34,7 @@
       <%= form_tag admin_sessions_path, class: 'form-signin' do %>
         <h2 class="form-signin-heading">登陆后台</h2>
         <%= text_field_tag :username, params[:username], class: "input-block-level", placeholder: "用户名" %> 
-        <%= text_field_tag :password, params[:password], class: "input-block-level", placeholder: "密码" %> 
+        <%= password_field_tag :password, params[:password], class: "input-block-level", placeholder: "密码" %> 
         <label class="checkbox">
           <input type="checkbox" value="remember-me"> 
         </label>

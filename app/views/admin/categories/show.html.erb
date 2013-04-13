@@ -1,20 +1,13 @@
 <article class="module width_3_quarter">
   <header>
-    <h3 class="tabs_involved">用户管理</h3>
+    <h3 class="tabs_involved"><%= category.title%>中的书签</h3>
 		<ul class="tabs">
-   			<li><a href="#tab1">用户</a></li>
     		<li><a href="#tab2">书签</a></li>
     		<li><a href="#tab3">收藏夹</a></li>    		
 		</ul>    
   </header>
     <div class="tab_container">
       <div id="tab1" class="tab_content">
-      <div id="users-list">
-        <%= render 'users' %>
-      </div>
-      
-      </div>
-      <div id="tab2" class="tab_content">
       <div id="bookmarks-list">
       <table class="tablesorter display" cellspacing="0" >
         <thead>
@@ -25,24 +18,22 @@
         </tr>
        </thead>
        <tbody>
-        <% bookmarks.each do |book|%> 
-          <tr>
-            <td><%= check_box_tag "users-item", book.id %></td>
-            <td><%= link_to book.link, admin_bookmark_path(book)%></td>
-            <td><%= book.user.username %></td>
-            <td><%= book.updated_at %></td>
-            <td>
+       <% bookmarks.each do |book|%> 
+        <tr>
+          <td><%= link_to book.link, "http://#{book.link}"%></td>
+          <td><%= link_to book.title, admin_bookmark_path(book) %></td>
+          <td>
             <%= link_to image_tag("admin/icn_edit.png"), edit_admin_bookmark_path(book), title: "编辑"%>
-              
-            <%= link_to image_tag("admin/icn_trash.png"), admin_boomark_path(book), method: :delete, title: "删除" %>
-            </td>
-          </tr>
-        <% end %>
-        </tbody>
-      </table>
-      </div>
-      </div>
-     <div id="tab3" class="tab_content">
+          
+            <%= link_to image_tag("admin/icn_trash.png"), admin_bookmark_path(book), method: :delete, title: "删除" %>
+          </td>
+        </tr>
+       <% end %>
+      </tbody>
+    </table>
+   </div>
+  </div>
+     <div id="tab2" class="tab_content">
         <div id="categories-list">
         <table class="tablesorter display" cellspacing="0" id="categories-list">
           <thead>

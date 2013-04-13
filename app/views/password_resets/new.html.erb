@@ -1,0 +1,7 @@
+<h3>重新设置您到密码</h3>
+<p>我们将给发送确认邮件</p>
+<%= form_tag password_resets_path  do |f|%>
+  <%= label_tag "您注册到邮箱地址:"%>
+  <%= email_field_tag :email,params[:email], required: :required %>
+  <%= submit_tag "确认"%>
+<% end %>

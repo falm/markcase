@@ -3,4 +3,5 @@ class Category < ActiveRecord::Base
 
   belongs_to :user
   has_many :bookmarks
+  self.per_page = ENV['PER_PAGE'] 
 end

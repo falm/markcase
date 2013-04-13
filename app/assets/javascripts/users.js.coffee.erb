@@ -1,4 +1,4 @@
-
+#encoding: utf-8
 <%# environment.context_class.instance_eval { include BookmarksHelper}%>
 
 $(document).ready ->
@@ -13,19 +13,24 @@ $(document).ready ->
 
   # bookmarks change method
   bookmark_change = (data) ->
-    $.post "/bookmarks/#{exports.bookmark_id}", { bookmark: { tag_list:  data.toString() }, _method: 'PUT'}, (data) ->
+    $.post "/bookmarks/#{exports.bookmark_id}.json", { tags:  data.toString() , _method: 'PUT'}, (data) ->
       element = $(".has_tags[data-id='#{exports.bookmark_id}']")
-      #alert data.message
       html = ""
       for tag in data.taglist
         html+="
           <li>
-            <a href='#' class='tag-background'>#{tag}</a>
+            <a href='#' class='tag-background'>#{tag.name}</a>
           </li>
         "
       element.html html
     ,"json"
    
+  # when bookmark-item click get website description of current bookmark
+  description = (url) ->
+    $.getJSON '/bookmarks/description.json', { url: url }, (data) ->
+      $(".description").html data.description
+
+ 
   $(".bookmark-item").draggable()
   #Bookmark item click event
   $(document).on "click", ".bookmark-item", ->
@@ -35,7 +40,7 @@ $(document).ready ->
     $.get "/bookmarks/note.json", { t_id: exports.bookmark_id}, (data)->
       $(".bookmark_note").val data.note
     , "json"
-
+    description($(this).find("small").html())
 
   # 打开添加标签筐 并绑定 tag-it 事件
   $(document).on "click", ".tag-button", ->
@@ -134,10 +139,38 @@ $(document).ready ->
     false
 
   $('.more-tags').on 'ajax:success', (e, data, textStatus,jqXHR) ->
-    list = ("#bookmark-list")
+    alert "loading.."
+    list = $(".bookmark-list")
+    #list.empty()
     html = ""
     for tag in data
       html += "
-        <li>#{tag}</li>
+        <li >
+          <a href='/bookmarks/tag/#{tag.name}' class='tag-link'  >#{tag.name}</a>
+        </li>
       "
     list.html html
+
+  # show category remove link when mouse over categories list
+  $(".categories-list").mouseover ->
+    $(this).css("width", "80")
+    $(this).css("display", "inline-block")
+    $(this).parent().find(".category-remove").show()
+    
+  # remove deleted categories item and remove link when category deleted 
+  $(".category-remove").click ->
+    $(this).parent().find(".categories-list").remove()
+    $(this).remove()
+  
+  # hide category remove link and restore categories item style  When mouseleave categories list 
+  $(".categories-list").parents("li").mouseleave ->
+    $(this).find(".categories-list").css("width","195")
+    $(this).css("display","block")
+    $(this).parent().find(".category-remove").hide()
+
+  # set control bar draggable 
+  $(".control_bar").draggable()
+
+  $("#add-mark input[type='text']").keydown (e) ->
+    if keyCode == 13
+      $("#add-mark").submit()

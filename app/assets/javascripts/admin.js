@@ -23,8 +23,8 @@ $(document).ready(function() {
   $(".tab_content:first").show(); //Show first tab content
 
   //On Click Event
-  $("ul.tabs li").click(function() {
-
+  //$("ul.tabs li").click(function() {
+  $(document).on("click","ul.tabs li",function(){
     $("ul.tabs li").removeClass("active"); //Remove any "active" class
     $(this).addClass("active"); //Add "active" class to selected tab
     $(".tab_content").hide(); //Hide all tab content

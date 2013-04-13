@@ -1,0 +1,28 @@
+<table class="tablesorter display" cellspacing="0" >
+  <thead>
+    <tr>
+          <th>书签链接</th>
+          <th>标题</th>
+          <th>操作</th>
+        </tr>
+       </thead>
+  <tbody>
+    <% @bookmarks.each do |book|%> 
+      <tr>
+        <!--<td><%# check_box_tag "users-item", book.id %></td>-->
+        <td><%= link_to book.link, "http://#{book.link}"%></td>
+        <td><%= link_to book.title, admin_bookmark_path(book) %></td>
+        <td>
+        <%= link_to image_tag("admin/icn_edit.png"), edit_admin_bookmark_path(book), title: "编辑"%>
+          
+        <%= link_to image_tag("admin/icn_trash.png"), admin_bookmark_path(book), method: :delete, title: "删除" %>
+        </td>
+       </tr>
+     <% end %>
+  </tbody>
+</table>
+<div class="flickr_pagination">  
+  <%= will_paginate @bookmarks %>  
+</div>       
+
+

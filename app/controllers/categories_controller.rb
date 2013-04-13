@@ -27,4 +27,8 @@ class CategoriesController < ApplicationController
       end
     end
   end
+  
+  def destroy
+    category.destroy
+  end
 end

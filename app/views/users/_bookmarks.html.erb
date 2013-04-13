@@ -6,20 +6,22 @@
               <%= check_box_tag "id[]", bookmark.id %>
             </div>
             <div class="span11 ">
-              <h4 class=" media-heading"><%= bookmark.title%></h4>
-              <%= link_to bookmark.link, "http://#{bookmark.link}" %>
+              <%= link_to "http://#{bookmark.link}" do %>
+                <h4><%= bookmark.title %></h4>
+              <% end %>
+              <small><%= bookmark.link %></small>
               <%= link_to bookmark_path(bookmark), title: "喜欢", class: "bookmark-star", remote: true, format: 'json' do %>
                 <i class="icon-star <%= 'icon-white' unless bookmark.star%>"></i>
               <% end %>
               <a href="#" title="添加标签"   class="tag-button"><i class="icon-tags"></i></a>
               <ul class="has_tags pull-right" data-id="<%= bookmark.id%>">
                 <li>标签:</li>
-                <% bookmark.tag_list.each do |tag|%>
+                <% bookmark.tags.each do |tag|%>
                   <li><%= link_to tag,  tag_bookmarks_path(tag),  class: "tag-link tag-background" %></li>
                 <% end %>
               </ul>                             
               <ul id="myTags" class="add-tags pull-right" name="<%= bookmark.id%>">
-                <% bookmark.tag_list.each do |tag|%>
+                <% bookmark.tags.each do |tag|%>
                   <li><%= tag %></li>
                 <% end %>
               </ul>

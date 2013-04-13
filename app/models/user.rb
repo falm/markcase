@@ -1,12 +1,13 @@
 class User < ActiveRecord::Base
   attr_accessible :description, :email, :password, :username, :password_confirmation
-  validates_presence_of :username, :email ,:password
+  validates_presence_of :username, :email ,:password, :on => :create
   validates_confirmation_of :password, message: "towice password not equal"
 
   has_many :bookmarks  
   has_many :categories
+  acts_as_tagger
 
-  self.per_page = 3
+  self.per_page = ENV['PER_PAGE']
     
     
   def password
@@ -43,7 +44,20 @@ class User < ActiveRecord::Base
     user
   end
     
-  private
+  def send_password_reset
+    generate_token(:password_reset_token)
+    self.password_reset_send_at = Time.zone.now
+    save!
+    UserMailer.password_reset(self).deliver
+  end
+ 
+  def generate_token(column)
+    begin
+      self[column] = SecureRandom.urlsafe_base64
+    end while User.exists?(column => self[column])
+  end
+private
+
   def generate_password(pass)
     salt = Array.new(10) { rand(512).to_s(36) }.join
     self.salt, self.hashed_password =
@@ -54,4 +68,5 @@ class User < ActiveRecord::Base
     {username: args[:username], password: args[:password], password_confirmation: args[:password_confirmation],
     email: args[:email]}
   end
+
 end

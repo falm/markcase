@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+
   expose(:users)
   expose(:user) { User.find(current_user.id)}
   expose(:categories) { user.categories}
@@ -11,7 +12,7 @@ class UsersController < ApplicationController
     @user = User.register(params)
     if @user  
       session[:user] = @user
-      redirect_to home_path, notice: "register successful!"
+      redirect_to home_path, notice: "注册成功！"
     else
       flash[:error] = "your email or password are incorrect relase try again"       
       redirect_to root_path    
@@ -20,6 +21,7 @@ class UsersController < ApplicationController
   end
 
   def update
+    
     if user.update_attributes(params[:user]) 
       redirect_to settings_url, notice: "successfully updated your information"      
     else

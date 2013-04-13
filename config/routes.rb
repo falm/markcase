@@ -1,5 +1,6 @@
 Markcase::Application.routes.draw do
 
+
   match '/' => 'application#index', :as => 'root'
   match '/home' => 'users#home', :as => 'home'
   match '/home/tag/:tag' => 'users#home', :as => 'home_tag'
@@ -8,10 +9,12 @@ Markcase::Application.routes.draw do
   resources :sessions
   resources :users
   resources :settings 
+  resources :password_resets
   resources :bookmarks do 
     collection  do 
       delete 'destroy_multiple'
       get 'tag/:tags' => 'bookmarks#tag', :as => 'tag'
+      get 'description'
       get 'tags'
     end
   end
@@ -32,8 +35,9 @@ Markcase::Application.routes.draw do
     resources :bookmarks do 
       collection do 
         get 'tags/:tag' => 'bookmarks#tags', :as => 'tags'
+        get 'tag'
       end
     end
-    resources :sessions
+    resources :sessions, :only => ['create']
   end
 end

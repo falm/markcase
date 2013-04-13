@@ -1,8 +1,8 @@
 <% @categories.each do |category|%>
-  <li style="display:block;">
-    <%= link_to category_path(category), remote: true, style: "display:block;", class: "pull-left categories-list" do %>
+  <li >
+    <%= link_to category_path(category), remote: true,  class: " categories-list" do %>
       <i class="icon-folder-open"></i> <%= category.title%><!--<i class="pull-right icon-remove"></i>-->
-      <%= link_to category_path(category), class: "pull-right", style: "display:inline;", remote: true, method: :delete do %>
+      <%= link_to category_path(category), class: "category-remove pull-left", remote: true, method: :delete do %>
         <i class="icon-remove"></i>
       <% end %>
     <% end %> 

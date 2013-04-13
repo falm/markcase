@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130406035139) do
+ActiveRecord::Schema.define(:version => 20130413183055) do
 
   create_table "administrators", :force => true do |t|
     t.string   "username"
@@ -65,8 +65,10 @@ ActiveRecord::Schema.define(:version => 20130406035139) do
     t.text     "description"
     t.string   "hashed_password"
     t.string   "salt"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+    t.string   "password_reset_token"
+    t.datetime "password_reset_send_at"
   end
 
 end
