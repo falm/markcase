@@ -17,7 +17,7 @@
               
               <% bookmark.tags.each do |tag|%>
                 
-                <%= link_to tag,tags_admin_bookmarks_path(tag.name) %>
+                <%= link_to tag, tags_admin_bookmarks_path(tag) %>
               <% end %>
             </td> 
           </tr>          

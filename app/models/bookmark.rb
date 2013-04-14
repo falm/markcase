@@ -17,9 +17,13 @@ class Bookmark < ActiveRecord::Base
   
   scope :favorite, lambda { where(star: true)}
   scope :show_inbox, lambda { where(inbox: true)}
+  
 
   after_create :get_bookmark_title
   
+  def tags
+    tags_from(user) 
+  end
 private 
 
 

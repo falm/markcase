@@ -30,6 +30,9 @@ gem 'acts-as-taggable-on'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 
+# settings 
+gem 'figaro'
+
 gem 'nokogiri'
 #gem 'rest-open-uri'
 group :development do 

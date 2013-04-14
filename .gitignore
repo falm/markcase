@@ -15,3 +15,6 @@
 /tmp
 
 # Ignore local_env.yml 
+
+# Ignore application configuration
+/config/application.yml

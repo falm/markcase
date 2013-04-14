@@ -14,12 +14,12 @@
       <a href="#" title="添加标签"   class="tag-button"><i class="icon-tags"></i></a>
       <ul class="has_tags pull-right" data-id="<%= bookmark.id%>">
         <li>标签:</li>
-        <% bookmark.tag_list.each do |tag|%>
+        <% bookmark.tags.each do |tag|%>
           <li><%= link_to tag,  tag_bookmarks_path(tag),  class: "tag-link tag-background" %></li>
         <% end %>
       </ul>                             
       <ul id="myTags" class="add-tags pull-right" name="<%= bookmark.id%>" >
-        <% bookmark.tag_list.each do |tag|%>
+        <% bookmark.tags.each do |tag|%>
           <li><%= tag %></li>
         <% end %>
       </ul>

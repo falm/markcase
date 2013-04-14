@@ -8,7 +8,7 @@ class UserMailer < ActionMailer::Base
   #
   def password_reset(user)
     @user = user
-    @url = edit_password_reset_url(@user.password_reset_token,host: 'localhost')
+    @url = edit_password_reset_url(@user.password_reset_token,host: ENV['HOST'])
     mail to: user.email, subject: "您在MarkCase上重置密码的确认邮件" 
   end
 end

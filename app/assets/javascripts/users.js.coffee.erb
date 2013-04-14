@@ -19,7 +19,7 @@ $(document).ready ->
       for tag in data.taglist
         html+="
           <li>
-            <a href='#' class='tag-background'>#{tag.name}</a>
+            <a href='/bookmarks/tag/#{tag}' class='tag-background'>#{tag}</a>
           </li>
         "
       element.html html
@@ -139,7 +139,6 @@ $(document).ready ->
     false
 
   $('.more-tags').on 'ajax:success', (e, data, textStatus,jqXHR) ->
-    alert "loading.."
     list = $(".bookmark-list")
     #list.empty()
     html = ""
