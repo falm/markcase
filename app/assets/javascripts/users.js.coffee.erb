@@ -1,25 +1,19 @@
 #encoding: utf-8
-<%# environment.context_class.instance_eval { include BookmarksHelper}%>
 
 $(document).ready ->
+  init()
   exports = this
   exports.bookmarks_ids = new Array
 
-  $("#add-bookmark").click ->
-    alert "add bookmark of users"
-    $.post bookmarks-path,#<%# bookmarks_path %>,
-      user_id: 1#<%# current_user.user_id %>
-      link: $("prependedInput").value()
-
   # bookmarks change method
   bookmark_change = (data) ->
-    $.post "/bookmarks/#{exports.bookmark_id}.json", { tags:  data.toString() , _method: 'PUT'}, (data) ->
+    $.post "/tags/#{data.toString()}.json", { bookmark_id: exports.bookmark_id , _method: 'PUT'}, (data) ->
       element = $(".has_tags[data-id='#{exports.bookmark_id}']")
       html = ""
       for tag in data.taglist
         html+="
           <li>
-            <a href='/bookmarks/tag/#{tag}' class='tag-background'>#{tag}</a>
+            <a href='/tags/#{tag}' class='tag-background'>#{tag}</a>
           </li>
         "
       element.html html
@@ -56,21 +50,45 @@ $(document).ready ->
         bookmark_change(tags)
 
   # 标记 加星 事件
-  change_star = (url,bool) ->
-    $.post url, { bookmark: { star: bool}, '_method': 'PUT'}, (data)->
+  change_star = (url) ->
+    $.post "#{url}.json", { '_method': 'PUT'},(data)->
       alert data.message
+      log = data.message
     ,'json'
-
+    return false
+  ###
   $(document).on "click", ".bookmark-star", ->
     icon = $(this).children()
-    #alert icon.attr("class") == "icon-star "
+    alert icon.attr("class") == "icon-star "
     if icon.attr("class") == "icon-star "
-      icon.addClass("icon-white")
       change_star(this.href,false)
+      icon.addClass("icon-white")
     else
-      icon.removeClass("icon-white")
       change_star(this.href,true)
-
+      icon.removeClass("icon-white")
+  #$(document).on "mouseover", ".bookmark-star", ->
+  $(".bookmark-star").cycle [ ->
+    $(this).children().toggleClass("icon-white")
+    change_star(this.href)
+    alert "one"
+  , ->
+    $(this).children().toggleClass("icon-white")
+    change_star(this.href)
+    alert "two"
+  ]
+  ###
+  $(document).on "click",".bookmark-star", ->
+  #$(".bookmark-star").on "click", ->
+    clicks = $(this).data('clicks')
+    if clicks
+      $(this).children().toggleClass("icon-white")
+      change_star(this.href)
+      alert "one"
+    else
+      $(this).children().toggleClass("icon-white")
+      change_star(this.href)
+      alert "two"
+    $(this).data('clicks',!clicks)
 
   # 当 add-tags 失去焦点时隐藏它
   $(document).on "blur", ".add-tags input", ->
@@ -113,18 +131,7 @@ $(document).ready ->
   $("#select-all").click ->
     $("input[type='checkbox']").not(this).attr("checked",this.checked)
 
-  $(".bookmark-delete").click ->
-    $('.bookmark-item input[type="checkbox"]:checked').each ->
-      alert this.val()
-      exports.bookmarks_ids.push this.val()
-    alert exports.bookmarks_ids.toString()
-    $.post this.href, { id: exports.bookmark_ids  }, (data) ->
-      alert data.message
-    ,'json'
 
-  # create category ajax success event
-  $(".category-form").on "ajax:success", (e, data, textStatus,jqXHR) ->
-    alert data.message
 
   # show bookmarks of current tag
   $(document).on "click", ".tag-link", ->
@@ -138,14 +145,15 @@ $(document).ready ->
     $.getScript(this.href)
     false
 
+  # show more tags
   $('.more-tags').on 'ajax:success', (e, data, textStatus,jqXHR) ->
     list = $(".bookmark-list")
     #list.empty()
     html = ""
     for tag in data
       html += "
-        <li >
-          <a href='/bookmarks/tag/#{tag.name}' class='tag-link'  >#{tag.name}</a>
+        <li>
+          <a href='/tags/#{tag.name}' class='tag-link'  >#{tag.name}</a>
         </li>
       "
     list.html html

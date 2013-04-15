@@ -24,3 +24,7 @@
 *.~
 # Ignore cache
 /vendor/bundle
+/public/system/*
+
+*.sassc
+.sass-cache
