@@ -1,4 +1,3 @@
-#encoding: utf-8
 class CategoriesController < ApplicationController
   expose(:user) { User.find(current_user.id)}
   expose(:categories) { user.categories}

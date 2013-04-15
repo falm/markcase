@@ -5,10 +5,3 @@ development:
   database: markcase_development
   username: root
   password: jay
-
-production:
-  adapter: mysql2
-  host: localhost
-  database: markcase_development
-  username: root
-  password: jay

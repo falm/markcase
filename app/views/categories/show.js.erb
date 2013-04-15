@@ -1,2 +1,0 @@
-  $(".bookmark-list").html("<%= escape_javascript(render 'bookmarks_of_category')%>")
-

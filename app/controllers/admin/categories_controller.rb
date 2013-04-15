@@ -1,4 +1,3 @@
-#encoding: utf-8
 class Admin::CategoriesController < AdminController
   expose(:user)
   expose(:categories) { user.categories} 

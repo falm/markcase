@@ -20,7 +20,6 @@
 //= require twitter/bootstrap/transition
 // require jqBootstrapValidation
 //= require jqBootstrapValidation.1.3.4
-//= require cycle
 //= require tag-it
 //= require users
 //= require bookmarks

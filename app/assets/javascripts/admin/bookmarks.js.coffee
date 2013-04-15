@@ -16,4 +16,13 @@ $(document).ready ->
       tags = $(this).tagit("assignedTags")
       change_tags(tags)
 
+  ###
+  $("#bookmarkTags input").blur ->
+    tags_string = $("#bookmarkTags").tagit("assignedTags").toString()
+    $("#bookmark_tag_list").val(tags_string)
 
+  $("#bookmarkTags").tagit
+    afterTagRemoved: (event,ui)->
+      tags_string = $("#bookmarkTags").tagit("assignedTags").toString()
+      $("#bookmark_tag_list").val(tags_string)
+  ###

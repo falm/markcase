@@ -21,10 +21,10 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   #gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
   gem 'jquery-ui-rails'
-  gem 'jquery-rails'
 end
 
 gem 'anjlab-bootstrap-rails', '>= 2.3', :require => 'bootstrap-rails'
+gem 'jquery-rails'
 gem 'decent_exposure'
 gem 'acts-as-taggable-on'
 gem 'will_paginate'

@@ -1,4 +1,3 @@
-#encoding: utf-8
 class ApplicationController < ActionController::Base 
 protect_from_forgery
   def index
@@ -9,13 +8,8 @@ protect_from_forgery
   end
   helper_method :current_user
   before_filter :check_user, except: [:create]
-  before_filter :make_action_mail_use_request_host, only: [:create]
 
 protected
-
-  def make_action_mail_use_request_host
-    ActionMailer::Base.default_url_options[:host] = request.host    
-  end
 
   def check_user
     return if controller_name == 'application'

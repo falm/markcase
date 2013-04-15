@@ -1,4 +1,3 @@
-#encoding: utf-8
 class Admin::SessionsController < AdminController
   skip_before_filter :login_required
   layout false

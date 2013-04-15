@@ -11,10 +11,12 @@
 //= require_self
 //= require_directory ./admin
 
+$(document).ready(function(){ 
+    $(".tablesorter").tablesorter(); 
+});
 
 $(document).ready(function() {
 
-  $(".tablesorter").tablesorter(); 
   //When page loads...
   $(".tab_content").hide(); //Hide all content
   $("ul.tabs li:first").addClass("active").show(); //Activate first tab
