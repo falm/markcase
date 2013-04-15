@@ -10,7 +10,7 @@
         <li class="head">
           <div>
             <!--<img data-src="holder.js/300x200"  src="<%= image_path("head.png")%>" class="img-polaroid">-->
-            <%= image_tag avatar_url(current_user,150)%>
+            <%= image_tag avatar_url(current_user,150), class: "img-rounded img-polaroid"%>
           </div>
         </li>
         <li>
@@ -36,12 +36,12 @@
         <li class="nav-header">标签</li>                              
         <% user.owned_tags.limit(5).order('id desc').each do |tag| %>
           <li>
-            <%= link_to  tag_bookmarks_path(tag.name), class: "tag-link" do %>
+            <%= link_to  tag_path(tag.name), class: "tag-link" do %>
               <i class="icon-tag"></i> <%= tag.name %>
             <% end %>
           </li>
         <% end %>
-        <li><%= link_to "更多标签", tags_bookmarks_path, class: "more-tags", remote: true, format: "json" %><li>
+        <li><%= link_to "更多标签", tags_path, class: "more-tags", remote: true, format: "json" %><li>
       </ul>
     </div>
     <!-- left END -->
@@ -49,7 +49,7 @@
   <div class="span6">
     <!-- center  -->  
     <div class="center">
-      <%= form_tag  destroy_multiple_bookmarks_path, method: :delete do %>
+      <%= form_tag  multiple_bookmarks_path, method: :delete do %>
       <div class=" control_bar">
         <div class="span2">
           <%= check_box_tag "select-all",params[:ids]%> 全选
@@ -81,7 +81,7 @@
       <h4 class="title-of-description"></h4>
       <img src="" />
       <p class="description">
-                Ruby China，对！没错！这里就是 Ruby 社区，目前这里已经是国内最权威的 Ruby 社区，
+              选择左面到书签 这里将显示对应到网站简介 (如果它有的话..) 
       </p>
       <form>
         <textarea class="bookmark_note" placeholder="还没有笔记呢..." ></textarea>

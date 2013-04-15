@@ -1,3 +1,4 @@
+#encoding: utf-8
 module BookmarksHelper
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::FormTagHelper

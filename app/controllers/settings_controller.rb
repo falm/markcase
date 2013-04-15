@@ -1,3 +1,4 @@
+#encoding: utf-8
 class SettingsController < ApplicationController
   expose(:user) { User.find(current_user.id) }
 =begin

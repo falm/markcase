@@ -1,3 +1,4 @@
+#encoding: utf-8
 class Admin::BookmarksController < AdminController
   
   expose(:bookmarks) { Bookmark.order("id desc").paginate(page: params[:page])}

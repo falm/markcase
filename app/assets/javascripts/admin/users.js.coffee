@@ -4,26 +4,6 @@ $(document).ready ->
   exports = this #global variable
   exports.user_ids = new Array #user id collection array
 
-  #loading bookmarks data to ajax method
-  ###
-  load_bookmark = (id)->
-    $.get "/admin/users/get_bookmarks/#{id}.json",  (data) ->
-      tbody = $("#bookmarks-list > tbody")
-      html = ""
-      for bookmark in data
-        html += "
-        <tr>
-          <td><a href='/admin/bookmarks/#{bookmark.id}'>#{bookmark.link}</a></td>
-          <td>#{bookmark.title}</td>
-          <td><a title='编辑' href='/admin/bookmarks/#{bookmark.id}/edit'><img src='/assets/admin/icn_edit.png' /></a>
-              <a title='删除' data-method='delete' href='/admin/bookmarks/#{bookmark.id}'>
-                <img src='/assets/admin/icn_trash.png' />
-              </a>
-          </td>
-        </tr>"
-      tbody.html(html)
-    ,"json"
-  ###
   load_bookmark = (id) ->
     uid = exports.user_id
     $.getScript "/admin/bookmarks.js?user_id=#{uid}"
@@ -31,24 +11,7 @@ $(document).ready ->
   #loading categories data to ajax method
   load_categories = (id) ->
     $.getScript "/admin/users/#{id}/categories.js"
-  ###
-  load_categories = (id)->
-    $.get "/admin/users/get_categories/#{id}.json",  (data) ->
-      tbody = $("#categories-list > tbody")
-      html = ""
-      for category in data
-        html += "
-        <tr>
-          <td><a href='/admin/categories/#{category.id}'>#{category.title}</a></td>
-          <td><a title='编辑' href='/admin/categories/#{category.id}/edit'><img src='/assets/admin/icn_edit.png' /></a>
-              <a title='删除' data-method='delete' href='/admin/categories/#{category.id}'>
-                <img src='/assets/admin/icn_trash.png' />
-              </a>
-          </td>
-        </tr>"
-      tbody.html(html)
-    ,"json"
-  ###
+
   #set available data
   $("#bookmarkTags").tagit
     availableTags: ["rails", "ruby"]

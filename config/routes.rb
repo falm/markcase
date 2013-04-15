@@ -4,18 +4,17 @@ Markcase::Application.routes.draw do
   match '/' => 'application#index', :as => 'root'
   match '/home' => 'users#home', :as => 'home'
   match '/home/tag/:tag' => 'users#home', :as => 'home_tag'
-  match '/reset-password' => 'settings#reset_password', :as => 'reset_password'
+  match '/reset_password' => 'settings#reset_password', :as => 'reset_password'
 
   resources :sessions
   resources :users
   resources :settings 
   resources :password_resets
+  resources :tags
   resources :bookmarks do 
     collection  do 
-      delete 'destroy_multiple'
-      get 'tag/:tags' => 'bookmarks#tag', :as => 'tag'
+      delete 'multiple'
       get 'description'
-      get 'tags'
     end
   end
   resources :categories

@@ -1,3 +1,4 @@
+#encoding: utf-8
 class Admin::UsersController < AdminController
 
   expose(:users) { User.paginate(page: params[:page])}
