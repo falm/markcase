@@ -1,3 +1,4 @@
+#encoding: utf-8
 class UsersController < ApplicationController
 
   expose(:users)
@@ -31,7 +32,6 @@ class UsersController < ApplicationController
   end
 
   def home
-    get_bookmarks   
     @categories = categories
     @bookmarks = bookmarks.where(inbox: false)
     respond_to   do |format|
@@ -39,13 +39,5 @@ class UsersController < ApplicationController
       format.js { render layout: false } 
     end
   end
-private 
-  def get_bookmarks
-    case params[:show_type]
-      when 'inbox'
-        @inbox_bookmarks = bookmarks.show_inbox 
-      when 'favorite'
-        @inbox_bookmarks = bookmarks.favorite
-    end
-  end
+
 end

@@ -30,11 +30,7 @@
 
 
   $(function(){
-    $("input").not("[type='submit']").not("[type='hidden']").jqBootstrapValidation({
-
-      submitSuccess: function($form,event){
-      }
-    });
-    $("form").submit(submitHandler);
+    $("input").not("[type='submit']").not("[type='hidden']").jqBootstrapValidation();
+    //$("form").submit(submitHandler);
   });
   

@@ -1,3 +1,4 @@
+#encoding: utf-8
 class PasswordResetsController < ApplicationController
   skip_before_filter :check_user
 

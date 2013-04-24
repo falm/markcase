@@ -1,3 +1,4 @@
+
 <% @bookmarks.each do |bookmark|%>
 <li class="media  bookmark-item ">
   <%= hidden_field_tag bookmark.id %>
@@ -30,4 +31,3 @@
 <div class="flickr_pagination">  
   <%= will_paginate @bookmarks, renderer: BootstrapPagination::Rails %>  
 </div>
-         

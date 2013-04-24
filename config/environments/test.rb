@@ -34,4 +34,13 @@ Markcase::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  config.assets.compress = true
+
+  config.assets.compile = true  
+
+  config.assets.precompile += %w( admin.js admin.css)  
+
+  config.assets.digest = true
+
 end

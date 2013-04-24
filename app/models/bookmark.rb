@@ -10,10 +10,6 @@ class Bookmark < ActiveRecord::Base
   self.per_page =  ENV['PER_PAGE']
   acts_as_taggable_on :tags
 
-  scope :off_star, lambda { update_attributes(star: false)}
-  scope :on_star, lambda { udpate_attributes(star: true)}
-  scope :inbox, lambda { update_attributes(inbox: true)}
-  scope :unbox, lambda { update_attributes(inbox: false)}
   
   scope :favorite, lambda { where(star: true)}
   scope :show_inbox, lambda { where(inbox: true)}
@@ -23,6 +19,11 @@ class Bookmark < ActiveRecord::Base
   
   def tags
     tags_from(user) 
+  end
+
+  def change_star
+    update_attribute(:star,!self.star) 
+    save
   end
 private 
 

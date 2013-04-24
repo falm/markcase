@@ -32,7 +32,7 @@ class BookmarksController < ApplicationController
   end
 
   def update
-    if user.tag(bookmark,with: params[:tags],on: :tags) 
+    if bookmark.change_star 
       respond_to do |format|
         format.json { render json: { taglist: bookmark.tags, message: "successfully updated bookmark"}}
       end
@@ -65,20 +65,6 @@ class BookmarksController < ApplicationController
     end
   end
 
-  def tag
-    @bookmarks = Bookmark.tagged_with(params[:tags]).paginate(page: params[:page]) 
-    respond_to do |format| 
-      format.js {render layout: false } 
-    end
-  end
-
-  def tags
-    @tags = user.owned_tags.order(:id)
-    respond_to  do |format|
-      format.json { render json: @tags}
-    end
-  end
-
   def description
     require 'open-uri'
     url = params[:url] 
@@ -97,13 +83,12 @@ class BookmarksController < ApplicationController
     end
   end
 
-  def destroy_multiple
+  def multiple
     if params[:destroy_button]
       Bookmark.destroy(params[:id])
       redirect_to home_path, notice: "已删除选择的书签"
       return 
-    end
-    if params[:inbox_button]
+    elsif params[:inbox_button]
       bookmark.each do |bo| 
         unless bo.update_attribute(:inbox,true)
           flash[:error] = "归档失败"
@@ -124,10 +109,4 @@ class BookmarksController < ApplicationController
     end
   end
 
-  def destroy
-    bookmark.destroy
-    respond_to do |format|
-      format.json { head no_content}
-    end
-  end
 end

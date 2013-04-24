@@ -15,7 +15,7 @@
       <ul class="has_tags pull-right" data-id="<%= bookmark.id%>">
         <li>标签:</li>
         <% bookmark.tags.each do |tag|%>
-          <li><%= link_to tag,  tag_bookmarks_path(tag),  class: "tag-link tag-background" %></li>
+          <li><%= link_to tag,  tag_path(tag),  class: "tag-link tag-background" %></li>
         <% end %>
       </ul>                             
       <ul id="myTags" class="add-tags pull-right" name="<%= bookmark.id%>" >
