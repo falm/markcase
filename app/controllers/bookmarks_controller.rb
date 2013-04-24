@@ -34,7 +34,7 @@ class BookmarksController < ApplicationController
   def update
     if bookmark.change_star 
       respond_to do |format|
-        format.json { render json: { taglist: bookmark.tags, message: "successfully updated bookmark"}}
+        format.json { render json: { star: bookmark.star, message: "successfully updated bookmark"}}
       end
     else
       respond_to do |format|

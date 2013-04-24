@@ -52,43 +52,22 @@ $(document).ready ->
   # 标记 加星 事件
   change_star = (url) ->
     $.post "#{url}.json", { '_method': 'PUT'},(data)->
-      alert data.message
-      log = data.message
+      log = data.star
     ,'json'
-    return false
-  ###
-  $(document).on "click", ".bookmark-star", ->
-    icon = $(this).children()
-    alert icon.attr("class") == "icon-star "
-    if icon.attr("class") == "icon-star "
-      change_star(this.href,false)
-      icon.addClass("icon-white")
-    else
-      change_star(this.href,true)
-      icon.removeClass("icon-white")
-  #$(document).on "mouseover", ".bookmark-star", ->
-  $(".bookmark-star").cycle [ ->
-    $(this).children().toggleClass("icon-white")
-    change_star(this.href)
-    alert "one"
-  , ->
-    $(this).children().toggleClass("icon-white")
-    change_star(this.href)
-    alert "two"
-  ]
-  ###
+   # return false
+
   $(document).on "click",".bookmark-star", ->
   #$(".bookmark-star").on "click", ->
-    clicks = $(this).data('clicks')
-    if clicks
+    flag = $(this).css "icon-white"
+    #alert flag
+    if flag#clicks
       $(this).children().toggleClass("icon-white")
       change_star(this.href)
-      alert "one"
+      #alert "one"
     else
       $(this).children().toggleClass("icon-white")
       change_star(this.href)
-      alert "two"
-    $(this).data('clicks',!clicks)
+      #alert "two"
 
   # 当 add-tags 失去焦点时隐藏它
   $(document).on "blur", ".add-tags input", ->

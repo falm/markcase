@@ -23,8 +23,9 @@ class Bookmark < ActiveRecord::Base
 
   def change_star
     update_attribute(:star,!self.star) 
-    save
+    self.star
   end
+
 private 
 
 
