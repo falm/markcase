@@ -83,7 +83,7 @@ $(document).ready ->
     backdrop: false
     show: false
 
-  # show inbox bookmarks
+  # show inbox oookmarks
   $(".inbox").on 'click', ->
     $.getScript("#{this.href}.js")
     false
@@ -139,7 +139,7 @@ $(document).ready ->
 
   # show category remove link when mouse over categories list
   $(".categories-list").mouseover ->
-    $(this).css("width", "80")
+    $(this).css("width", "150")
     $(this).css("display", "inline-block")
     $(this).parent().find(".category-remove").show()
     
