@@ -25,6 +25,8 @@
 # Ignore cache
 /vendor/bundle
 /public/system/*
+# Ignore assets 
+/public/assets/*
 
 *.sassc
 .sass-cache
