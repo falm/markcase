@@ -1,8 +1,8 @@
 
 # This file is Rails appliaction configuration file
-GMAIL_USER: 'hjj1992'
-GMAIL_PASS: 'a6586600g'
-GMAIL_ADD: 'hjj1992@gmail.com'
+GMAIL_USER: '*'
+GMAIL_PASS: '*'
+GMAIL_ADD: '*'
 
 PER_PAGE: 5
 
