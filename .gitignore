@@ -30,3 +30,7 @@
 
 *.sassc
 .sass-cache
+
+# Ignore IDE
+
+.idea
