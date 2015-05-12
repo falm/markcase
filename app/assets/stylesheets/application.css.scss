@@ -27,7 +27,7 @@ body {
 	margin:0px;
 	padding:0px;
 	/*background:#e1e1e1; */
-  background:#dadee0 image-url("body-bg.png")
+  background:#dadee0 image-url("body-bg.png");
 }
 
 .body {
@@ -204,9 +204,11 @@ body {
 
 /*======== Footer END=========*/
 
-@import "application/index"
+@import "application/index";
 /*
 @import "sessions"
 @import "bookmarks"
 @import "users"
 */
+
+

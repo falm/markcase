@@ -160,3 +160,13 @@ $(document).ready ->
   $("#add-mark input[type='text']").keydown (e) ->
     if keyCode == 13
       $("#add-mark").submit()
+
+
+  container = document.querySelector('#fluid-container')
+
+  mas = new Masonry(container, {
+    columnWidth: 10,
+    itemSelector: '.movie-item'
+  })
+
+  $('.dropdown-toggle').dropdown()

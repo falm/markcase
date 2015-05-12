@@ -1,15 +1,24 @@
 #encoding: utf-8
-class ApplicationController < ActionController::Base 
-protect_from_forgery
+class ApplicationController < ActionController::Base
+
+  protect_from_forgery
+
   def index
-    
+
+    @movies = Movie.order('created_at desc').limit(30)
+
   end
+
   def current_user
     @current_user ||= session[:user] 
   end
+
   helper_method :current_user
+
   before_filter :check_user, except: [:create]
+
   before_filter :make_action_mail_use_request_host, only: [:create]
+
 protected
 
   def make_action_mail_use_request_host

@@ -3,7 +3,7 @@ require 'open-uri'
 
 class Bookmark < ActiveRecord::Base
 
-  MAX_ATTEMPTS = ENV['MAX_ATTEMPTS']
+  MAX_ATTEMPTS = ENV['MAX_ATTEMPTS'].to_i
   attr_accessible :category_id, :inbox, :link, :note, :star, :title, :user_id, :tag_list
   belongs_to :user
   belongs_to :category
@@ -15,8 +15,9 @@ class Bookmark < ActiveRecord::Base
   scope :show_inbox, lambda { where(inbox: true)}
   
 
-  after_create :get_bookmark_title
-  
+  # after_create :get_bookmark_title
+  after_create :get_movie_link
+
   def tags
     tags_from(user) 
   end
@@ -26,7 +27,20 @@ class Bookmark < ActiveRecord::Base
     self.star
   end
 
-private 
+
+  #
+  # 通过url获取电影的简介
+  #
+  def self.get_movie_description(url)
+
+    movie_uri = open(url)
+
+    doc = Nokogiri::HTML.parse(movie_uri)
+
+    text = doc.css('span[property="v:summary"]').text
+  end
+
+  private 
 
 
   def get_bookmark_title
@@ -45,4 +59,43 @@ private
       self.save
     end
   end
+
+
+  #
+  # 获取电影的链接
+  #
+  def get_movie_link
+
+    keywords = CGI::escape self.title
+
+    url = "http://movie.douban.com/subject_search?search_text=#{keywords}"
+
+    uri_handler = open(url)
+
+    page = Nokogiri::HTML.parse(uri_handler)
+
+    if page.blank?
+      self.link = ''
+      self.save
+    end
+
+    movie_url = page.css('.pl2').first.css('a').attr('href').value
+
+    self.link = movie_url
+
+    self.save
+
+  end
+
+  def get_movie_desc
+
+    movie_uri = open(self.link)
+
+    doc = Nokogiri::HTML.parse(movie_uri)
+
+    text = doc.css('span[property="v:summary"]').text
+
+  end
+
+
 end

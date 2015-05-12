@@ -78,7 +78,7 @@
   <div class="span3 ">
     <!-- right -->
     <div class="right">
-      <h4 class="title-of-description"></h4>
+      <h4 class="title-of-description">电影剧情简介</h4>
       <img src="" />
       <p class="description">
                点击左面的书签 这里将会显示它的简介信息(如果它有的话！)
@@ -109,21 +109,24 @@
 <% end %>
 
 
-<%= form_tag bookmarks_path, class: "modal fade", id: "add-mark" do %>
+<%= form_tag bookmarks_path, class: 'modal fade', id: 'add-mark' do %>
   <div class="modal-header">
     <a class="close" data-dismiss="modal">×</a>
-    <h3>添加书签</h3>
+    <h3>添加电影书签</h3>
   </div>
   <div class="modal-body">
     <div class="input-prepend input-append">
-      <span class="add-on">http://</span>
-      <%= text_field_tag "bookmark[link]" %>
-      <%= submit_tag "添加", class: "btn"%>
+      <!--<span class="add-on">http://</span>-->
+      <%= text_field_tag 'bookmark[title]' %>
+      <%= submit_tag '添加', class: 'btn'%>
 	  </div>
     <br/>
     <small>按Enter确认</small>
   </div>
 <% end %>
 <!-- Alert END-->
+
+<!-- share movies modal -->
+<%= render partial: 'new_movie_modal' %>
 
 

@@ -5,32 +5,38 @@
         </p>
     </div>-->
 
-      <div class="hero-unit ">
-        <h2>个人书签管理网站</h2>
-        <p class="lead">加入MarkCase 精彩随处可得</p>
-        <a class="btn btn-large btn-success" data-toggle="modal" href="#register">加入MarkCase</a>
-      </div>
+      <!--<div class="hero-unit ">-->
+        <!--<h2>个人书签管理网站</h2>-->
+        <!--<p class="lead">加入MarkCase 精彩随处可得</p>-->
+        <!--<a class="btn btn-large btn-success" data-toggle="modal" href="#register">加入MarkCase</a>-->
+      <!--</div>-->
 
-      <hr>
+      <!--<hr>-->
 
-    
-      <div class="row-fluid">
-        <div class="span4">
-          <h4>在这里收藏一切精彩</h4>
-          <p> </p>
-          
-        </div>
-        <div class="span4">
-          <h4>随时随地阅读精彩</h4>
-          <p></p>
-          
-       </div>
-        <div class="span4">
-          <h4>发现你感兴趣到内容</h4>
-          <p></p>
-          <p><a class="btn" href="#">显示详细 &raquo;</a></p>
-        </div>
-      </div>    
+    <!---->
+      <!--<div class="row-fluid">-->
+        <!--<div class="span4">-->
+          <!--<h4>在这里收藏一切精彩</h4>-->
+          <!--<p> </p>-->
+          <!---->
+        <!--</div>-->
+        <!--<div class="span4">-->
+          <!--<h4>随时随地阅读精彩</h4>-->
+          <!--<p></p>-->
+          <!---->
+       <!--</div>-->
+        <!--<div class="span4">-->
+          <!--<h4>发现你感兴趣到内容</h4>-->
+          <!--<p></p>-->
+          <!--<p><a class="btn" href="#">显示详细 &raquo;</a></p>-->
+        <!--</div>-->
+      <!--</div>    -->
+
+<ul class="thumbnails"  id="fluid-container">
+  <% @movies.each do |movie| %>
+    <%= render partial: 'movies/item', locals: {movie: movie}%>
+  <% end %>
+</ul>
 
 
 <!-- Alert -->
@@ -86,7 +92,7 @@
     <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
     <ul class="dropdown-menu">
       <li><%= link_to "忘记密码？", new_password_reset_path  %></li>
-    <ul>
+    </ul>
   </div>
 <% end %>
 

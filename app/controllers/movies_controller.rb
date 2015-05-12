@@ -1,8 +1,10 @@
 #encoding: utf-8
-class BookmarksController < ApplicationController
+class MoviesController < ApplicationController
+
   MAX_ATTEMPTS = 2
   expose(:user) { User.find(current_user.id) }
-  expose(:bookmarks) { user.bookmarks} 
+  expose(:bookmarks) { user.bookmarks}
+  expose(:movie)
   expose(:bookmark)
 
   def index
@@ -14,15 +16,23 @@ class BookmarksController < ApplicationController
     end
   end
 
+  def new
+
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def create
-    if bookmark.save
+    if movie.save
       respond_to do |format|
         format.html { redirect_to home_url, notice: 'successfully created bookmark'}
         format.json { render json: { message: "successfully created bookmark"}  }
       end
     else
       respond_to do |format|
-        format.html { 
+        format.html {
           flash[:error] = "addtions bookmarks failed !"
           redirect_to home_url
         }
@@ -30,19 +40,6 @@ class BookmarksController < ApplicationController
       end
     end
   end
-
-  def update
-    if bookmark.change_star 
-      respond_to do |format|
-        format.json { render json: { star: bookmark.star, message: "successfully updated bookmark"}}
-      end
-    else
-      respond_to do |format|
-        format.json { render json: { message: "failed udpated bookmark"} }
-      end
-    end
-  end
-
 
   def show
     case params[:id]
@@ -60,53 +57,27 @@ class BookmarksController < ApplicationController
         end
       when 'note'
         respond_to  do |format|
-          format.json { render json: Bookmark.select(:note).find(params[:t_id]).to_json  } 
+          format.json { render json: Bookmark.select(:note).find(params[:t_id]).to_json  }
         end
     end
   end
 
   def description
     require 'open-uri'
-    url = params[:url] 
+    url = params[:url]
     attempts = 0
     begin
 
       # doc = Nokogiri::HTML(open(url))
       # description = doc.xpath("//meta[@name='description']/@content").text
       description = Bookmark.get_movie_description url
-       
+
     rescue => e
       attempts += 1
-      retry if attempts <= MAX_ATTEMPTS 
+      retry if attempts <= MAX_ATTEMPTS
     end
     respond_to do |format|
       format.json { render json: {description: description} }
-    end
-  end
-
-  def multiple
-    if params[:destroy_button]
-      Bookmark.destroy(params[:id])
-      redirect_to home_path, notice: "已删除选择的书签"
-      return 
-    elsif params[:inbox_button]
-      bookmark.each do |bo| 
-        unless bo.update_attribute(:inbox,true)
-          flash[:error] = "归档失败"
-          redirect_to home_url
-          return 
-        end
-      end
-      redirect_to home_url, notice: "已归档"
-    else
-      bookmark.each do |bo|
-        unless bo.update_attribute(:category_id, params[:category_id]) 
-          flash[:error] = "移动失败"
-          redirect_to home_url
-          return 
-        end
-      end
-      redirect_to home_url, notice: "移动成功!"
     end
   end
 

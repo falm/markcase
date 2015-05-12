@@ -17,10 +17,10 @@
         <!-- Navbar link -->
         <ul class="nav">
           <li class="active">
-            <%= link_to "首页", root_path%>
+            <%= link_to '首页', root_path %>
           </li>
-          <% if controller_name == "users"%>
-            <li><a href="#add-mark" data-toggle="modal">添加书签</a></li>
+          <% if controller_name == 'users'%>
+            <li><a href="#add-mark" data-toggle="modal">添加电影书签</a></li>
           <% end %>
         </ul>
         <!-- Navbar link END-->
@@ -31,19 +31,20 @@
               <a name="relink" data-toggle="modal" href="#register">注册</a>
             </li>
             <li class="dropdown">
-              <a  name="llink" data-toggle="modal" href="#login">登陆</a>
+              <a  name="link" data-toggle="modal" href="#login">登陆</a>
             </li>
           <% else %>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
               <!--<i class="icon-user icon-white"></i>-->
-              <%= image_tag avatar_url(current_user,20)%>
-              <%= current_user.username %><b class="caret"></b></a>
+                <%= image_tag avatar_url(current_user, 20)%>
+                <%= current_user.username %><b class="caret"></b>
+              </a>
               <ul class="dropdown-menu">
-                <li><%= link_to "主页", home_path %></li>
-                <li><%= link_to "个人设置", settings_path %></li>
+                <li><%= link_to '主页', home_path %></li>
+                <li><%= link_to '个人设置', settings_path %></li>
                 <li class="divider"></li>
-                <li><%= link_to "退出", session_path(current_user), method: :delete %></li>                  
+                <li><%= link_to '退出', session_path(current_user), method: :delete %></li>
               </ul>
             </li>            
           <% end %>
@@ -75,7 +76,7 @@
 
   <div class="container">
 
-    <p class="muted credit">&copy;2013 Markcase powered by  <a href="https://github.com/falm">falm</a> .</p>
+    <p class="muted credit">&copy;2015 Markcase powered by  <a href="https://github.com/falm">falm</a> .</p>
   </div>
 
 </div>

@@ -1,0 +1,17 @@
+<li class="span3 movie-item">
+
+  <div class="thumbnail">
+    <!--<img src="<%#movie.cover_url%>" />-->
+    <%= image_tag movie.cover_url%>
+    <div class="caption">
+      <h4>
+        <%= movie.title %>
+      </h4>
+      评分: <%= movie.score %>/10.0
+      <h5>推荐感言:</h5>
+      <p><%= movie.recommend_words%></p>
+      <h5>剧情简介:</h5>
+      <p><%= raw movie.short_desc%></p>
+    </div>
+  </div>
+</li>

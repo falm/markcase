@@ -6,7 +6,8 @@
               <%= check_box_tag "id[]", bookmark.id %>
             </div>
             <div class="span11 ">
-              <%= link_to "http://#{bookmark.link}" do %>
+              <%# link_to "http://#{bookmark.link}" do %>
+              <%= link_to bookmark.link do %>
                 <h4><%= bookmark.title %></h4>
               <% end %>
               <small><%= bookmark.link %></small>
@@ -14,6 +15,7 @@
                 <i class="icon-star <%= 'icon-white' unless bookmark.star%>"></i>
               <% end %>
               <a href="#" title="添加标签"   class="tag-button"><i class="icon-tags"></i></a>
+              <%= link_to '推荐', new_movie_path(url: bookmark.link, title: bookmark.title), class: 'btn', remote: true %>
               <ul class="has_tags pull-right" data-id="<%= bookmark.id%>">
                 <li>标签:</li>
                 <% bookmark.tags.each do |tag|%>
@@ -30,6 +32,8 @@
         </li> 
         <% end %>
         <div class="flickr_pagination">  
-          <%= will_paginate @bookmarks, renderer: BootstrapPagination::Rails %>  
+          <% if @bookmarks.present? %>
+            <%= will_paginate @bookmarks, renderer: BootstrapPagination::Rails %>  
+          <% end %>
         </div>
 

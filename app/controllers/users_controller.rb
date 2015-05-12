@@ -34,6 +34,9 @@ class UsersController < ApplicationController
   def home
     @categories = categories
     @bookmarks = bookmarks.where(inbox: false)
+    Rails.logger.info do
+      puts @bookmarks
+    end
     respond_to   do |format|
       format.html
       format.js { render layout: false } 

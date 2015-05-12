@@ -11,9 +11,10 @@ Markcase::Application.routes.draw do
   resources :settings 
   resources :password_resets
   resources :tags
+  resources :movies
   resources :bookmarks do 
     collection  do 
-      get 'multiple'
+      delete 'multiple'
       get 'description'
     end
   end

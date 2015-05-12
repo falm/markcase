@@ -21,6 +21,7 @@
 // require jqBootstrapValidation
 //= require jqBootstrapValidation.1.3.4
 //= require tag-it
+//= require masonry.pkgd.min
 //= require users
 //= require bookmarks
 //= require sessions
@@ -33,4 +34,5 @@
     $("input").not("[type='submit']").not("[type='hidden']").jqBootstrapValidation();
     //$("form").submit(submitHandler);
   });
-  
+
+

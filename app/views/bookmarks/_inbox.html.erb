@@ -26,8 +26,10 @@
     </div>
   </div>
 </li> 
-<% end %>
+<% end if @bookmarks.present? %>
 <div class="flickr_pagination">  
-  <%= will_paginate @bookmarks, renderer: BootstrapPagination::Rails %>  
+  <% if @bookmark.present? %>
+    <%= will_paginate @bookmarks, renderer: BootstrapPagination::Rails %>  
+  <% end %>
 </div>
          
