@@ -30,7 +30,7 @@ gem 'acts-as-taggable-on'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 
-# settings 
+# settings
 gem 'figaro'
 
 gem 'nokogiri'
@@ -38,6 +38,8 @@ gem 'nokogiri'
 group :development do 
   gem 'better_errors'
   gem 'binding_of_caller'
+
+  gem 'rails-erd', '1.1.0'
 end
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
