@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
     
     if  Digest::SHA256.hexdigest(self.salt + args[:password])==
         self.hashed_password
-      password = args[:new_password]
+      self.password = args[:new_password]
       return save
     end
   end

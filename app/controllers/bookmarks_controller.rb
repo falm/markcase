@@ -71,8 +71,6 @@ class BookmarksController < ApplicationController
     attempts = 0
     begin
 
-      # doc = Nokogiri::HTML(open(url))
-      # description = doc.xpath("//meta[@name='description']/@content").text
       description = Bookmark.get_movie_description url
        
     rescue => e
