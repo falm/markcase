@@ -7,14 +7,6 @@ class MoviesController < ApplicationController
   expose(:movie)
   expose(:bookmark)
 
-  def index
-    bookmarks.each do |bookmark|
-      bookmark[:tag_list] = bookmark.tag_list
-    end
-    respond_to do |format|
-      format.json { render json: bookmarks}
-    end
-  end
 
   def new
 
@@ -41,26 +33,6 @@ class MoviesController < ApplicationController
     end
   end
 
-  def show
-    case params[:id]
-      when 'inbox'
-        @bookmarks = bookmarks.show_inbox.paginate(page: params[:page])
-        respond_to do |format|
-          format.json { render json: bookmarks.show_inbox }
-          format.js { render layout: false}
-        end
-      when 'favorite'
-        @bookmarks = bookmarks.favorite.paginate(page: params[:page])
-        respond_to do |format|
-          format.json { render json: bookmarks.favorite }
-          format.js { render layout: false}
-        end
-      when 'note'
-        respond_to  do |format|
-          format.json { render json: Bookmark.select(:note).find(params[:t_id]).to_json  }
-        end
-    end
-  end
 
   def description
     require 'open-uri'

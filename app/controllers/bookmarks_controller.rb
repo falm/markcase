@@ -18,15 +18,15 @@ class BookmarksController < ApplicationController
     if bookmark.save
       respond_to do |format|
         format.html { redirect_to home_url, notice: 'successfully created bookmark'}
-        format.json { render json: { message: "successfully created bookmark"}  }
+        format.json { render json: { message: 'successfully created bookmark'}  }
       end
     else
       respond_to do |format|
         format.html { 
-          flash[:error] = "addtions bookmarks failed !"
+          flash[:error] = 'additions bookmarks failed !'
           redirect_to home_url
         }
-        format.json { render json: { message: "addtions bookmarks failed !"} }
+        format.json { render json: { message: 'additions bookmarks failed !'} }
       end
     end
   end
@@ -34,11 +34,11 @@ class BookmarksController < ApplicationController
   def update
     if bookmark.change_star 
       respond_to do |format|
-        format.json { render json: { star: bookmark.star, message: "successfully updated bookmark"}}
+        format.json { render json: { star: bookmark.star, message: 'successfully updated bookmark'}}
       end
     else
       respond_to do |format|
-        format.json { render json: { message: "failed udpated bookmark"} }
+        format.json { render json: { message: 'failed updated bookmark'} }
       end
     end
   end
@@ -85,27 +85,25 @@ class BookmarksController < ApplicationController
   def multiple
     if params[:destroy_button]
       Bookmark.destroy(params[:id])
-      redirect_to home_path, notice: "已删除选择的书签"
-      return 
+      flash[:notice] = '已删除选择的书签'
     elsif params[:inbox_button]
       bookmark.each do |bo| 
         unless bo.update_attribute(:inbox,true)
-          flash[:error] = "归档失败"
-          redirect_to home_url
-          return 
+          flash[:error] = '归档失败'
+          redirect_to home_url and return
         end
       end
-      redirect_to home_url, notice: "已归档"
+      flash[:notice] = '已归档'
     else
       bookmark.each do |bo|
         unless bo.update_attribute(:category_id, params[:category_id]) 
-          flash[:error] = "移动失败"
-          redirect_to home_url
-          return 
+          flash[:error] = '移动失败'
+          redirect_to home_url and return
         end
       end
-      redirect_to home_url, notice: "移动成功!"
+      flash[:notice] = '移动成功!'
     end
+    redirect_to home_url
   end
 
 end

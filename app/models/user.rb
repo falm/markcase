@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessible :description, :email, :password, :username, :password_confirmation
   validates_presence_of :username, :email ,:password, :on => :create
-  validates_confirmation_of :password, message: "towice password not equal"
+  validates_confirmation_of :password, message: '两次密码不相同'
 
   has_many :bookmarks  
   has_many :categories
@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   def password
     @password
   end
+
   def password=(password)
     return unless password
     @password = password
@@ -21,7 +22,7 @@ class User < ActiveRecord::Base
   
   def reset_password(args)
     
-    if  Digest::SHA256.hexdigest(self.salt + args[:password])==
+    if Digest::SHA256.hexdigest(self.salt + args[:password])==
         self.hashed_password
       self.password = args[:new_password]
       return save

@@ -1,12 +1,7 @@
 #encoding: utf-8
 class UserMailer < ActionMailer::Base
-  default from: ENV['GMAIL_ADD']
+  default from: ENV['MAIL_ADD']
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.user_mailer.password_reset.subject
-  #
   def password_reset(user)
     @user = user
     @url = edit_password_reset_url(@user.password_reset_token,host: default_url_options[:host])
