@@ -68,10 +68,10 @@ Markcase::Application.configure do
   #Email
   config.action_mailer.delivery_method = :smtp  
     config.action_mailer.smtp_settings = {
-      :address                =>  "smtp.gmail.com",
+      :address                =>  ENV['MAIL_SMTP'],
       :port                   =>  587,
-      :user_name              =>  ENV['GMAIL_USER'],
-      :password               =>  ENV['GMAIL_PASS'],
+      :user_name              =>  ENV['MAIL_USER'],
+      :password               =>  ENV['MAIL_PASS'],
       :authentication         =>  'plain',
       :enable_starttls_auto   =>  true
     }
