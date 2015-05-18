@@ -67,18 +67,20 @@ class BookmarksController < ApplicationController
 
   def description
     require 'open-uri'
-    url = params[:url] 
+    url = params[:url]
+    title = params[:title]
     attempts = 0
     begin
 
       description = Bookmark.get_movie_description url
-       
+      image_url = Bookmark.get_movie_poster title
+
     rescue => e
       attempts += 1
       retry if attempts <= MAX_ATTEMPTS 
     end
     respond_to do |format|
-      format.json { render json: {description: description} }
+      format.json { render json: {description: description, image_url: image_url} }
     end
   end
 

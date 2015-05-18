@@ -20,13 +20,15 @@ $(document).ready ->
     ,"json"
    
   # when bookmark-item click get website description of current bookmark
-  description = (url) ->
-    $.getJSON '/bookmarks/description.json', { url: url }, (data) ->
+  description = (url, title) ->
+    $.getJSON '/bookmarks/description.json', { url: url, title: title }, (data) ->
       $(".description").html data.description
-
+      $(".description-image").attr('src', data.image_url)
  
   $(".bookmark-item").draggable()
+
   #Bookmark item click event
+
   $(document).on "click", ".bookmark-item", ->
     $(".bookmark-item").not(this).removeClass "selected"
     $(this).addClass "selected"
@@ -34,7 +36,7 @@ $(document).ready ->
     $.get "/bookmarks/note.json", { t_id: exports.bookmark_id}, (data)->
       $(".bookmark_note").val data.note
     , "json"
-    description($(this).find("small").html())
+    description($(this).find("small").html(), $(this).find('h4').html() )
 
   # 打开添加标签筐 并绑定 tag-it 事件
   $(document).on "click", ".tag-button", ->
@@ -56,18 +58,11 @@ $(document).ready ->
     ,'json'
    # return false
 
-  $(document).on "click",".bookmark-star", ->
-  #$(".bookmark-star").on "click", ->
-    flag = $(this).css "icon-white"
-    #alert flag
-    if flag#clicks
-      $(this).children().toggleClass("icon-white")
-      change_star(this.href)
-      #alert "one"
-    else
-      $(this).children().toggleClass("icon-white")
-      change_star(this.href)
-      #alert "two"
+  $(document).on 'click', '.bookmark-star', ->
+    $(this).children().toggleClass("icon-white")
+  $(document).on 'ajax:success', '.bookmark-star', (data, status, xhr) ->
+#    $(this).children().toggleClass("icon-white")
+    console.log(data)
 
   # 当 add-tags 失去焦点时隐藏它
   $(document).on "blur", ".add-tags input", ->

@@ -1,5 +1,5 @@
         <% @bookmarks.each do |bookmark|%>
-        <li class="media  bookmark-item ">
+        <li class="media  bookmark-item" id="bookmark-item-<%= bookmark.id %>" >
           <%= hidden_field_tag bookmark.id %>
           <div class="media-body">
             <div class="span1 pull-left">
@@ -11,7 +11,8 @@
                 <h4><%= bookmark.title %></h4>
               <% end %>
               <small><%= bookmark.link %></small>
-              <%= link_to bookmark_path(bookmark), title: "喜欢", class: "bookmark-star", remote: true, format: 'json' do %>
+              <%= link_to bookmark_path(bookmark), title: '喜欢', class: 'bookmark-star', remote: true, format: 'js', method: :patch do %>
+              <%# link_to '#', title: '喜欢', class: 'bookmark-star' do %>
                 <i class="icon-star <%= 'icon-white' unless bookmark.star%>"></i>
               <% end %>
               <a href="#" title="添加标签"   class="tag-button"><i class="icon-tags"></i></a>

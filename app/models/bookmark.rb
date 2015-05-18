@@ -40,6 +40,23 @@ class Bookmark < ActiveRecord::Base
     text = doc.css('span[property="v:summary"]').text
   end
 
+  #
+  # 获取 电影海报
+  #
+  def self.get_movie_poster(key)
+
+    encode_key = CGI::escape key
+
+    url = "http://www.1905.com/search/index-p-type-film-q-#{encode_key}.html"
+
+    page = Nokogiri::HTML(open(url))
+
+    image_url = page.css("img[title='#{key}']").attr('src').value
+
+    image_url.gsub(/\_[0-9]{3}\_[0-9]{3}\_/,'_200_300_')
+
+  end
+
   private 
 
 
