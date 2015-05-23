@@ -20,7 +20,10 @@
             <%= link_to '首页', root_path %>
           </li>
           <% if controller_name == 'users'%>
-            <li><a href="#add-mark" data-toggle="modal">添加电影书签</a></li>
+            <!--<li><a href="#add-mark" data-toggle="modal">添加电影书签</a></li>-->
+            <li>
+              <%= link_to '添加电影书签', new_bookmark_path, remote: true %>
+            </li>
           <% end %>
         </ul>
         <!-- Navbar link END-->

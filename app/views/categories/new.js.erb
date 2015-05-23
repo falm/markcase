@@ -1,0 +1,10 @@
+$('body').append('<%= escape_javascript(render partial: 'categories/new_modal')%>');
+
+$('#myModal').modal('show');
+
+$('#myModal').on('hidden', function(){
+
+  console.log(' remove category modal');
+  $('#myModal').remove();
+
+});

@@ -1,0 +1,23 @@
+<%= form_tag movies_path, class: 'modal fade', id: 'add-movie' do %>
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal">×</a>
+    <h3>添加电影到推荐列表</h3>
+  </div>
+  <div class="modal-body">
+
+    <%= hidden_field_tag 'movie[url]', params[:url]%>
+    <%= hidden_field_tag 'movie[title]', params[:title]%>
+    <%= hidden_field_tag 'movie[user_id]', current_user.id%>
+
+    <div class="control-group">
+     <div class="controls">
+       <%= label_tag '推荐感言' %>
+       <%= text_area_tag 'movie[recommend_words]', nil, class: 'recommend-words' %>
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <%= submit_tag '推荐', class: 'btn btn-primary'%>
+  </div>
+<% end %>

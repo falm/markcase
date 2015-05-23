@@ -1,3 +1,9 @@
-$('#add-movie > .modal-body').html("<%= escape_javascript(render partial: 'new_modal', locals: {movie: movie}) %>");
+$('body').append('<%= escape_javascript(render partial: 'movies/new_movie_modal' )%>');
 
 $('#add-movie').modal('show');
+$('#add-movie').on('hidden', function(){
+
+  console.log(' remove movie modal');
+  $('#add-movie').remove();
+
+});

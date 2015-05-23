@@ -5,6 +5,11 @@ class CategoriesController < ApplicationController
   expose(:category)
   expose(:bookmarks) { category.bookmarks.paginate(page: params[:page])}
 
+
+  def new
+    
+  end
+
   def show
     @bookmarks = bookmarks
     respond_to  do |format|
@@ -32,4 +37,5 @@ class CategoriesController < ApplicationController
   def destroy
     category.destroy
   end
+
 end

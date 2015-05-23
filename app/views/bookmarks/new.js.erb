@@ -1,0 +1,10 @@
+$('body').append('<%= escape_javascript(render partial: 'bookmarks/new_modal')%>');
+
+$('#add-mark').modal('show');
+
+$('#add-mark').on('hidden', function(){
+
+  console.log(' remove add-mark');
+  $('#add-mark').remove();
+
+});

@@ -14,6 +14,10 @@ class BookmarksController < ApplicationController
     end
   end
 
+  def new
+    
+  end
+
   def create
     if bookmark.save
       respond_to do |format|
