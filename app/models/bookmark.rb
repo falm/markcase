@@ -92,15 +92,19 @@ class Bookmark < ActiveRecord::Base
     page = Nokogiri::HTML.parse(uri_handler)
 
     if page.blank?
+
       self.link = ''
       self.save
+
+    else
+
+      movie_url = page.css('.pl2').first.css('a').attr('href').value
+
+      self.link = movie_url
+
+      self.save
+
     end
-
-    movie_url = page.css('.pl2').first.css('a').attr('href').value
-
-    self.link = movie_url
-
-    self.save
 
   end
 
