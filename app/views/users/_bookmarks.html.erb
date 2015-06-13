@@ -11,7 +11,7 @@
                 <h4><%= bookmark.title %></h4>
               <% end %>
               <small><%= bookmark.link %></small>
-              <%= link_to bookmark_path(bookmark), title: '喜欢', class: 'bookmark-star', remote: true, format: 'js', method: :patch do %>
+              <%= link_to bookmark_path(bookmark), title: '喜欢', class: 'bookmark-star', remote: true, format: 'js', method: :put do %>
               <%# link_to '#', title: '喜欢', class: 'bookmark-star' do %>
                 <i class="icon-star <%= 'icon-white' unless bookmark.star%>"></i>
               <% end %>

@@ -23,7 +23,7 @@
 	
 	<section id="secondary_bar">
 		<div class="user">
-			<p><%= current_admin.username %> (<a href="#">3 Messages</a>)</p>
+			<p><%= current_admin.username %> </p>
 		</div>
 		<div class="breadcrumbs_container">
 			<article class="breadcrumbs"><a href="index.html">Website Admin</a> <div class="breadcrumb_divider"></div> <a class="current">Dashboard</a></article>
@@ -39,8 +39,9 @@
     <ul class="toggle">
       <li class="icn_new_article"><%= link_to "浏览书签", admin_bookmarks_path %></li>
       <li class="icn_new_article"><%= link_to "添加书签", new_admin_bookmark_path %></li>
-      <li class="icn_categories"><a href="#">分类</a></li>
-      <li class="icn_tags"><a href="#">标签</a></li>
+
+      <!--<li class="icn_categories"><a href="#">分类</a></li>-->
+      <!--<li class="icn_tags"><a href="#">标签</a></li>-->
     </ul>
     <h3>用户管理</h3>
     <ul class="toggle">
@@ -48,23 +49,18 @@
       <li class="icn_view_users"><%= link_to "查看用户", admin_users_path %></li>
       <li class="icn_profile"><%= link_to "编辑用户", admin_users_path %></a></li>
     </ul>
-    <h3>媒体管理</h3>
-    <ul class="toggle">
-      <li class="icn_folder"><a href="#">File Manager</a></li>
-      <li class="icn_photo"><a href="#">Gallery</a></li>
-      <li class="icn_audio"><a href="#">Audio</a></li>
-      <li class="icn_video"><a href="#">Video</a></li>
-    </ul>
     <h3>Admin</h3>
     <ul class="toggle">
+      <!--
       <li class="icn_settings"><a href="#">选项</a></li>
       <li class="icn_security"><a href="#">安全</a></li>
+      -->
       <li class="icn_jump_back"><%= link_to "退出", admin_logout_path %></li>
     </ul>
     
     <footer>
       <hr />
-      <p><strong>Copyright &copy; 2013 Markcase Admin</strong></p>
+      <p><strong>Copyright &copy; 2015 Markcase Admin</strong></p>
       <p>Theme by <a href="http://www.medialoot.com">MediaLoot</a></p>
     </footer>
   </aside><!-- end of sidebar -->

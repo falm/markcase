@@ -1,12 +1,12 @@
 <article class="module width_3_quarter">
-  <header><h3 class="tabs_involved">书签管理</h3></header>
+  <header><h3 class="tabs_involved">电影书签管理</h3></header>
     <div class="tab_container">
       <div id="tab1" class="tab_content">
       <table class="tablesorter display" cellspacing="0" id="bookmarks">
         <thead>
         <tr>
           <th></th>
-          <th>书签链接</th>
+          <th>电影书签</th>
           <th>所有者</th>
           <th>操作</th>
         </tr>
@@ -15,12 +15,12 @@
         <% bookmarks.each do |bookmark|%> 
           <tr>
             <td><input type="checkbox"></td>
-            <td><%= link_to bookmark.link,admin_bookmark_path(bookmark)%></td>
+            <td><%= link_to bookmark.title, admin_bookmark_path(bookmark)%></td>
             <td><%= bookmark.user.username %></td>
             <td>
-            <%= link_to image_tag("admin/icn_edit.png"), edit_admin_bookmark_path(bookmark), title: "编辑"%>
+            <%= link_to image_tag('admin/icn_edit.png'), edit_admin_bookmark_path(bookmark), title: "编辑"%>
               
-            <%= link_to image_tag("admin/icn_trash.png"), admin_bookmark_path(bookmark), method: :delete, title: "删除" %>
+            <%= link_to image_tag('admin/icn_trash.png'), admin_bookmark_path(bookmark), method: :delete, title: "删除" %>
             </td>
           </tr>
         <% end %>

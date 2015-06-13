@@ -1,11 +1,11 @@
 <article class="module width_3_quarter">
-  <header><h3 class="tabs_involved">书签管理</h3></header>
+  <header><h3 class="tabs_involved">电影书签管理</h3></header>
     <div class="tab_container">
       <div id="tab1" class="tab_content">
         <table class="table">
           <tr> 
-            <td>书签链接：</td>
-            <td><%= link_to bookmark.link, "http://#{bookmark.link}" %></td>
+            <td>电影书签链接：</td>
+            <td><%= link_to bookmark.title, bookmark.link %></td>
           </tr>
           <tr> 
             <td>所有者：</td>

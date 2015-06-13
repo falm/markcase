@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
     @user = User.authenticate(params[:email],params[:password])
     if @user
       session[:user] = @user
-      flash[:notice] = 'Welcome  #{@user.username}'
+      flash[:notice] = "Welcome  #{@user.username}"
       redirect_to home_path
     else
       flash[:error] = 'The username or password are incorrect'

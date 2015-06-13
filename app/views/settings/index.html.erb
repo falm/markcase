@@ -5,23 +5,25 @@
 <div class="row">
   <div class="span8">
     
-    <%= form_for user, url: user_path(user), method: :put, class: "form-horizontal" do |f| %>
+    <%= form_for user, url: user_path(user), method: :put, class: 'form-horizontal' do |f| %>
       <fieldset>
         <legend>个人设置</legend>
+
         <div class="control-group">
           <label class="control-label" for="fileInput">上传头像</label>
-          <div class="controls">
-            <input class="input-file btn" id="fileInput" type="file">
-          </div>	
-        </div>    
-        <p>请在<a href="http://en.gavatar.com">Gavatar</a>上传头像MarkCase会自动同步</p>
+          <!--<div class="controls">-->
+            <!--<input class="input-file btn" id="fileInput" type="file">-->
+          <!--</div>	-->
+        </div>
+        <!---->
+        <p>请在<a href="https://cn.gavatar.com">Gavatar</a>上传头像MarkCase会自动同步</p>
         <div class="control-group">
           
-          <%= f.label "用户名", class: "control-label" %>
+          <%= f.label '用户名', class: 'control-label' %>
           <div class="controls">
            
-            <%= f.text_field :username, class: "input-xlarge",
-            required: :required, "data-validation-required-message" => "不能空" %>
+            <%= f.text_field :username, class: 'input-xlarge',
+            required: :required, 'data-validation-required-message' => '不能空' %>
             <p class="help-block">字母，数字，汉字皆可</p>
           </div>
         </div>

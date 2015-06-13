@@ -61,8 +61,8 @@ $(document).ready ->
   $(document).on 'click', '.bookmark-star', ->
     $(this).children().toggleClass("icon-white")
   $(document).on 'ajax:success', '.bookmark-star', (data, status, xhr) ->
-#    $(this).children().toggleClass("icon-white")
-    console.log(data)
+    $(this).children().toggleClass("icon-white")
+    console.log(data);
 
   # 当 add-tags 失去焦点时隐藏它
   $(document).on "blur", ".add-tags input", ->
