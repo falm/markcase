@@ -22,8 +22,7 @@ class User < ActiveRecord::Base
   
   def reset_password(args)
     
-    if Digest::SHA256.hexdigest(self.salt + args[:password])==
-        self.hashed_password
+    if Digest::SHA256.hexdigest(self.salt + args[:password]) == self.hashed_password
       self.password = args[:new_password]
       return save
     end
