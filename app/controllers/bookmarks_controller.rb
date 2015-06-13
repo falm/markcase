@@ -70,7 +70,6 @@ class BookmarksController < ApplicationController
   end
 
   def description
-    require 'open-uri'
     url = params[:url]
     title = params[:title]
     attempts = 0
