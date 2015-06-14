@@ -18,9 +18,9 @@
             <td><%= link_to bookmark.title, admin_bookmark_path(bookmark)%></td>
             <td><%= bookmark.user.username %></td>
             <td>
-            <%= link_to image_tag('admin/icn_edit.png'), edit_admin_bookmark_path(bookmark), title: "编辑"%>
+            <%= link_to image_tag('admin/icn_edit.png'), edit_admin_bookmark_path(bookmark), title: '编辑'%>
               
-            <%= link_to image_tag('admin/icn_trash.png'), admin_bookmark_path(bookmark), method: :delete, title: "删除" %>
+            <%= link_to image_tag('admin/icn_trash.png'), admin_bookmark_path(bookmark), method: :delete, title: '删除' %>
             </td>
           </tr>
         <% end %>
