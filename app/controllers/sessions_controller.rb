@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
       flash[:notice] = "Welcome  #{@user.username}"
       redirect_to home_path
     else
-      flash[:error] = 'The username or password are incorrect'
+      flash[:error] = '用户名和密码不正确'
       redirect_to root_path
     end
   end

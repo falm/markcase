@@ -11,7 +11,7 @@ class Admin::SessionsController < AdminController
       flash[:notice] = "Welcome  #{@admin.username}"
       redirect_to admin_users_url
     else
-      flash[:error] = "The username or password are incorrect"
+      flash[:error] = "用户名和密码不正确！"
       redirect_to admin_login_url
     end
   end
