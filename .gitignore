@@ -30,3 +30,4 @@
 
 *.sassc
 .sass-cache
+.idea/
