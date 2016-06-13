@@ -6,4 +6,3 @@ This is the source code of Markcase website
 ***
 
 
-all right reserved
